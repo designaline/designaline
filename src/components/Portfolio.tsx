@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { ExternalLink, MapPin } from "lucide-react";
 // import { useTheme } from '@/contexts/ThemeContext'
 import Image from "next/image";
@@ -10,7 +10,7 @@ import { useTheme } from "../contexts/ThemeContext";
 const Portfolio: React.FC = () => {
   const { isDark } = useTheme();
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -20,7 +20,7 @@ const Portfolio: React.FC = () => {
     },
   };
 
-  const cardVariants = {
+  const cardVariants: Variants = {
     hidden: { opacity: 0, y: 50 },
     visible: {
       opacity: 1,

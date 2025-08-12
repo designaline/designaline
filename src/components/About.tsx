@@ -123,7 +123,8 @@ const About: React.FC = () => {
               <p>
                 Our interdisciplinary team combines architectural innovation
                 with environmental science, delivering projects that not only
-                meet today's needs but safeguard tomorrow's possibilities.
+                meet today&apos;s needs but safeguard tomorrow&apos;s
+                possibilities.
               </p>
 
               <p>

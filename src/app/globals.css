@@ -1,5 +1,53 @@
 @import "tailwindcss";
 
+/* Custom cursor styles */
+* {
+  cursor: none;
+}
+
+button,
+a,
+[data-cursor="pointer"] {
+  cursor: none;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hide default scrollbar but keep functionality */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1b6b36;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #155a2e;
+}
+
+/* Prevent layout shift during animations */
+.motion-safe\:transform {
+  transform: translateZ(0);
+}
+
+/* Optimize for animations */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;

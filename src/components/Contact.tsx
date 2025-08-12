@@ -1,38 +1,41 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
-// import { useTheme } from '@/contexts/ThemeContext'
 import Image from "next/image";
 import { useTheme } from "../contexts/ThemeContext";
+
+// ✅ Strongly typed animation variants
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut", // ✅ Recognized literal string
+    },
+  },
+};
 
 const Contact: React.FC = () => {
   const { isDark } = useTheme();
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
-    },
-  };
-
-  const contactInfo = [
+  const contactInfo: {
+    icon: React.ElementType;
+    label: string;
+    value: string;
+    href?: string | null;
+  }[] = [
     {
       icon: Phone,
       label: "Phone",
@@ -59,9 +62,8 @@ const Contact: React.FC = () => {
     },
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Handle form submission
     alert("Thank you for your message! We'll get back to you soon.");
   };
 
@@ -75,7 +77,12 @@ const Contact: React.FC = () => {
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div className="text-center mb-16" variants={containerVariants}>
+        <motion.div
+          className="text-center mb-16"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
           <motion.div
             className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-[#1B6B36]/10 border border-[#1B6B36]/20 mb-6"
             variants={itemVariants}
@@ -96,7 +103,7 @@ const Contact: React.FC = () => {
             }`}
             variants={itemVariants}
           >
-            Let's Create Something{" "}
+            Let&apos;s Create Something{" "}
             <span className="text-[#1B6B36]">Sustainable</span> Together
           </motion.h2>
 
@@ -106,14 +113,17 @@ const Contact: React.FC = () => {
             }`}
             variants={itemVariants}
           >
-            Ready to start your sustainable design journey? We'd love to hear
-            about your project and explore how we can bring your vision to life.
+            Ready to start your sustainable design journey? We&apos;d love to
+            hear about your project and explore how we can bring your vision to
+            life.
           </motion.p>
         </motion.div>
 
         <motion.div
           className="grid lg:grid-cols-2 gap-16"
           variants={containerVariants}
+          initial="hidden"
+          animate="visible"
         >
           {/* Contact Information */}
           <motion.div className="space-y-8" variants={itemVariants}>
@@ -215,63 +225,11 @@ const Contact: React.FC = () => {
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label
-                      className={`block text-sm font-medium mb-2 ${
-                        isDark ? "text-gray-300" : "text-gray-700"
-                      }`}
-                    >
-                      First Name
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      className={`w-full px-4 py-3 rounded-lg border transition-colors duration-200 focus:ring-2 focus:ring-[#1B6B36]/20 focus:border-[#1B6B36] ${
-                        isDark
-                          ? "bg-gray-900 border-gray-600 text-white"
-                          : "bg-white border-gray-300 text-gray-900"
-                      }`}
-                    />
-                  </div>
-
-                  <div>
-                    <label
-                      className={`block text-sm font-medium mb-2 ${
-                        isDark ? "text-gray-300" : "text-gray-700"
-                      }`}
-                    >
-                      Last Name
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      className={`w-full px-4 py-3 rounded-lg border transition-colors duration-200 focus:ring-2 focus:ring-[#1B6B36]/20 focus:border-[#1B6B36] ${
-                        isDark
-                          ? "bg-gray-900 border-gray-600 text-white"
-                          : "bg-white border-gray-300 text-gray-900"
-                      }`}
-                    />
-                  </div>
+                  <FormField label="First Name" type="text" isDark={isDark} />
+                  <FormField label="Last Name" type="text" isDark={isDark} />
                 </div>
 
-                <div>
-                  <label
-                    className={`block text-sm font-medium mb-2 ${
-                      isDark ? "text-gray-300" : "text-gray-700"
-                    }`}
-                  >
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    required
-                    className={`w-full px-4 py-3 rounded-lg border transition-colors duration-200 focus:ring-2 focus:ring-[#1B6B36]/20 focus:border-[#1B6B36] ${
-                      isDark
-                        ? "bg-gray-900 border-gray-600 text-white"
-                        : "bg-white border-gray-300 text-gray-900"
-                    }`}
-                  />
-                </div>
+                <FormField label="Email Address" type="email" isDark={isDark} />
 
                 <div>
                   <label
@@ -326,7 +284,6 @@ const Contact: React.FC = () => {
                       "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
                   }}
                   whileTap={{ scale: 0.95 }}
-                  data-cursor="pointer"
                 >
                   Send Message
                   <motion.div
@@ -344,5 +301,33 @@ const Contact: React.FC = () => {
     </motion.section>
   );
 };
+
+// ✅ Extracted reusable input field to avoid repetition
+interface FormFieldProps {
+  label: string;
+  type: string;
+  isDark: boolean;
+}
+
+const FormField: React.FC<FormFieldProps> = ({ label, type, isDark }) => (
+  <div>
+    <label
+      className={`block text-sm font-medium mb-2 ${
+        isDark ? "text-gray-300" : "text-gray-700"
+      }`}
+    >
+      {label}
+    </label>
+    <input
+      type={type}
+      required
+      className={`w-full px-4 py-3 rounded-lg border transition-colors duration-200 focus:ring-2 focus:ring-[#1B6B36]/20 focus:border-[#1B6B36] ${
+        isDark
+          ? "bg-gray-900 border-gray-600 text-white"
+          : "bg-white border-gray-300 text-gray-900"
+      }`}
+    />
+  </div>
+);
 
 export default Contact;
