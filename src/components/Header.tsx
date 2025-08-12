@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Sun, Moon, Menu, X } from "lucide-react";
 import { useTheme } from "../contexts/ThemeContext";
-// import { useTheme } from '@/contexts/ThemeContext'
 
 const Header: React.FC = () => {
   const { isDark, toggleTheme } = useTheme();
@@ -33,18 +33,27 @@ const Header: React.FC = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <motion.div
-            className="flex-shrink-0"
+            className="flex items-center gap-2 cursor-pointer"
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
-            <h1 className="text-xl font-bold text-[#1B6B36]">GreenSpace</h1>
-            <p
-              className={`text-xs ${
-                isDark ? "text-gray-400" : "text-gray-600"
-              }`}
-            >
-              Sustainable Architecture
-            </p>
+            <Image
+              src="/logo.png"
+              alt="GreenSpace Logo"
+              width={40}
+              height={40}
+              priority
+            />
+            <div>
+              <h1 className="text-xl font-bold text-[#1B6B36]">DesignAline</h1>
+              <p
+                className={`text-xs ${
+                  isDark ? "text-gray-400" : "text-gray-600"
+                }`}
+              >
+                Sustainable Architecture & Interiors
+              </p>
+            </div>
           </motion.div>
 
           {/* Desktop Navigation */}

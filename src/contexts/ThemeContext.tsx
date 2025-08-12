@@ -38,12 +38,20 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   if (!mounted) {
-    return <div className="min-h-screen bg-white " />;
+    return <div className="min-h-screen bg-white" />;
   }
 
   return (
     <ThemeContext.Provider value={{ isDark, toggleTheme }}>
-      {children}
+      {/* Full-width background */}
+      <div
+        className={`min-h-screen transition-colors duration-300 ${
+          isDark ? "bg-gray-900 text-white" : "bg-white text-black"
+        }`}
+      >
+        {/* Centered + max width content */}
+        <div className="max-w-7xl mx-auto px-4">{children}</div>
+      </div>
     </ThemeContext.Provider>
   );
 };
