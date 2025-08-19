@@ -3,7 +3,6 @@
 import React from "react";
 import { motion, Variants } from "framer-motion";
 import { ExternalLink, MapPin } from "lucide-react";
-// import { useTheme } from '@/contexts/ThemeContext'
 import Image from "next/image";
 import { useTheme } from "../contexts/ThemeContext";
 
@@ -32,64 +31,48 @@ const Portfolio: React.FC = () => {
     },
   };
 
+  // ✅ Updated Projects List from your details
   const projects = [
     {
-      title: "EcoTower Residential",
-      location: "Portland, Oregon",
-      category: "Architecture",
-      image: "https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg",
+      title: "Pearl City",
+      location: "Hyderabad",
+      category: "Residential Township",
+      image: "/projects/pearl_city.jpg", // replace with actual path
       description:
-        "A 12-story residential tower featuring passive solar design and rainwater harvesting.",
-      stats: { energy: "40% reduction", certification: "LEED Gold" },
+        "A township of 5 apartments with opulent 3 BHK spaces, designed for ample natural lighting and ventilation. Earthy tones and local materials reflect a sustainable approach.",
+      // stats: { energy: "40% reduction", certification: "LEED Gold" },
     },
     {
-      title: "Green Oasis Office",
-      location: "San Francisco, CA",
-      category: "Commercial",
-      image: "https://images.pexels.com/photos/380769/pexels-photo-380769.jpeg",
-      description:
-        "Modern office space with living walls and natural ventilation systems.",
-      stats: { energy: "55% reduction", certification: "LEED Platinum" },
-    },
-    {
-      title: "Sustainable Family Home",
-      location: "Austin, Texas",
+      title: "Soma Adobe",
+      location: "Hyderabad",
       category: "Residential",
-      image:
-        "https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg",
+      image: "/projects/soma_abode.jpg",
       description:
-        "Contemporary family home with solar panels and geothermal heating.",
-      stats: { energy: "65% reduction", certification: "Net Zero Ready" },
+        "A premium apartment project with lavishly proportioned 3 BHK homes, integrating natural ventilation, earthy tones, and locally sourced sustainable materials.",
     },
     {
-      title: "Biophilic Wellness Center",
-      location: "Seattle, Washington",
-      category: "Interior Design",
-      image:
-        "https://images.pexels.com/photos/2736834/pexels-photo-2736834.jpeg",
+      title: "Commercial & Residential Complex",
+      location: "Hyderabad",
+      category: "Mixed-Use Development",
+      image: "/projects/commercial_resedentials.jpeg",
       description:
-        "Wellness center interior emphasizing natural materials and abundant daylight.",
-      stats: { energy: "35% reduction", certification: "WELL Gold" },
+        "A hybrid commercial and residential building designed to blend functionality with sustainable architecture principles.",
     },
     {
-      title: "Carbon Neutral Campus",
-      location: "Berkeley, California",
-      category: "Architecture",
-      image:
-        "https://images.pexels.com/photos/1571463/pexels-photo-1571463.jpeg",
-      description:
-        "University campus building achieving carbon neutrality through innovative design.",
-      stats: { energy: "70% reduction", certification: "LEED Platinum" },
-    },
-    {
-      title: "Urban Green Apartments",
-      location: "Denver, Colorado",
+      title: "Celest Apartments",
+      location: "Palasa",
       category: "Residential",
-      image:
-        "https://images.pexels.com/photos/2724749/pexels-photo-2724749.jpeg",
+      image: "/projects/celestial.jpg",
       description:
-        "Multi-family housing with rooftop gardens and energy recovery systems.",
-      stats: { energy: "45% reduction", certification: "LEED Gold" },
+        "A thoughtfully designed apartment complex balancing contemporary living with contextual sustainability concepts.",
+    },
+    {
+      title: "Luxury Villa",
+      location: "Vizag",
+      category: "Residential Villa",
+      image: "/projects/luxury_villas.png",
+      description:
+        "A 5BHK villa with a luxury contemporary aesthetic, crafted with modern materials and elements that highlight sophistication and comfort.",
     },
   ];
 
@@ -124,7 +107,7 @@ const Portfolio: React.FC = () => {
             }`}
             variants={cardVariants}
           >
-            Award-Winning <span className="text-[#1B6B36]">Sustainable</span>{" "}
+            <span className="text-[#1B6B36]">Sustainable</span> & Contemporary
             Projects
           </motion.h2>
 
@@ -134,9 +117,9 @@ const Portfolio: React.FC = () => {
             }`}
             variants={cardVariants}
           >
-            Explore our portfolio of innovative projects that demonstrate our
-            commitment to environmental responsibility and architectural
-            excellence.
+            Explore our portfolio of residential, commercial, and villa projects
+            designed with a strong focus on sustainability and lifestyle
+            enhancement.
           </motion.p>
         </motion.div>
 
@@ -164,25 +147,29 @@ const Portfolio: React.FC = () => {
               transition={{ type: "spring", stiffness: 300 }}
             >
               {/* Image */}
-              <div className="relative overflow-hidden h-48">
+              <div className="relative h-48 overflow-hidden">
                 <motion.div
                   whileHover={{ scale: 1.1 }}
                   transition={{ duration: 0.5 }}
+                  className="w-full h-full"
                 >
                   <Image
                     src={project.image}
                     alt={project.title}
-                    width={400}
-                    height={300}
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover object-center"
                   />
                 </motion.div>
+
+                {/* Gradient overlay */}
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"
                   initial={{ opacity: 0 }}
                   whileHover={{ opacity: 1 }}
                   transition={{ duration: 0.3 }}
                 />
+
+                {/* External link button */}
                 <motion.div
                   className="absolute top-4 right-4"
                   initial={{ opacity: 0 }}
@@ -199,7 +186,7 @@ const Portfolio: React.FC = () => {
                   </motion.button>
                 </motion.div>
 
-                {/* Category Badge */}
+                {/* Category badge */}
                 <motion.div
                   className="absolute top-4 left-4"
                   initial={{ opacity: 0, x: -20 }}
@@ -224,7 +211,6 @@ const Portfolio: React.FC = () => {
                     {project.location}
                   </span>
                 </div>
-
                 <h3
                   className={`text-xl font-semibold mb-3 ${
                     isDark ? "text-white" : "text-gray-900"
@@ -232,7 +218,6 @@ const Portfolio: React.FC = () => {
                 >
                   {project.title}
                 </h3>
-
                 <p
                   className={`mb-4 text-sm leading-relaxed ${
                     isDark ? "text-gray-300" : "text-gray-600"
@@ -240,9 +225,8 @@ const Portfolio: React.FC = () => {
                 >
                   {project.description}
                 </p>
-
                 {/* Stats */}
-                <div className="flex items-center justify-between pt-4 border-t border-gray-200/20">
+                {/* <div className="flex items-center justify-between pt-4 border-t border-gray-200/20">
                   <div>
                     <div className="text-sm font-medium text-[#1B6B36]">
                       {project.stats.energy}
@@ -271,7 +255,7 @@ const Portfolio: React.FC = () => {
                       Certification
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </motion.div>
           ))}

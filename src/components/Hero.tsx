@@ -187,7 +187,7 @@ const Hero: React.FC = () => {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 1.7, duration: 0.5 }}
                 >
-                  12+
+                  5+
                 </motion.div>
                 <div
                   className={`text-sm ${
@@ -207,14 +207,14 @@ const Hero: React.FC = () => {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 1.9, duration: 0.5 }}
                 >
-                  95%
+                  90+{" "}
                 </motion.div>
                 <div
                   className={`text-sm ${
                     isDark ? "text-gray-400" : "text-gray-600"
                   }`}
                 >
-                  Energy Efficiency
+                  Happy Customers{" "}
                 </div>
               </motion.div>
             </motion.div>
@@ -238,7 +238,7 @@ const Hero: React.FC = () => {
             </motion.div>
 
             {/* Floating Card */}
-            <motion.div
+            {/* <motion.div
               className={`absolute -bottom-6 -left-6 p-6 rounded-xl shadow-2xl ${
                 isDark ? "bg-gray-800 border border-gray-700" : "bg-white"
               }`}
@@ -275,7 +275,7 @@ const Hero: React.FC = () => {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </motion.div> */}
           </motion.div>
         </motion.div>
       </div>

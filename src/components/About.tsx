@@ -38,25 +38,22 @@ const About: React.FC = () => {
 
   const team = [
     {
-      name: "Sarah Chen",
+      name: "Tarun Naik",
       role: "Principal Architect",
       specialty: "Sustainable Design",
-      image:
-        "https://images.pexels.com/photos/3760514/pexels-photo-3760514.jpeg",
+      image: "/team/tarun.jpg",
     },
     {
-      name: "Michael Rodriguez",
-      role: "Interior Design Director",
-      specialty: "Biophilic Design",
-      image:
-        "https://images.pexels.com/photos/3760263/pexels-photo-3760263.jpeg",
+      name: "Lalitha Aishwarya",
+      role: "Landscape Design Director",
+      specialty: "Sustainable Landscape Designer",
+      image: "/team/aishwarya.jpg",
     },
     {
-      name: "Emma Thompson",
-      role: "Sustainability Consultant",
-      specialty: "LEED Certification",
-      image:
-        "https://images.pexels.com/photos/3760533/pexels-photo-3760533.jpeg",
+      name: "Rajesh",
+      role: "Operations Head",
+      // specialty: "",
+      image: "/team/rajesh.jpg",
     },
   ];
 
@@ -83,8 +80,8 @@ const About: React.FC = () => {
               isDark ? "text-white" : "text-gray-900"
             }`}
           >
-            Pioneering <span className="text-[#1B6B36]">Sustainable</span>{" "}
-            Architecture
+            Pioneering <span className="text-[#1B6B36]">Architecture &</span>{" "}
+            Interior Design
           </h2>
 
           <p
@@ -92,7 +89,7 @@ const About: React.FC = () => {
               isDark ? "text-gray-300" : "text-gray-600"
             }`}
           >
-            For over a decade, GreenSpace has been at the forefront of
+            For over 5+ years, Design A’ line has been at the forefront of
             sustainable architecture and interior design, creating spaces that
             harmonize with nature while exceeding client expectations.
           </p>
@@ -115,22 +112,29 @@ const About: React.FC = () => {
               }`}
             >
               <p>
-                Founded in 2012 with a vision to transform the built
-                environment, GreenSpace emerged from a passion for creating
-                beautiful spaces that respect and enhance our natural world.
+                Founded in 2020, Designaine was born from a bold vision: to
+                craft spaces that inspire, endure, and elevate everyday
+                experiences.
               </p>
 
               <p>
-                Our interdisciplinary team combines architectural innovation
-                with environmental science, delivering projects that not only
-                meet today&apos;s needs but safeguard tomorrow&apos;s
-                possibilities.
+                Rooted in a deep passion for design excellence, we blend the art
+                of architecture with the finesse of interior design—creating
+                environments that are not only aesthetically compelling but also
+                profoundly functional.
               </p>
 
               <p>
-                From residential homes to commercial complexes, every project
-                reflects our commitment to sustainability, functionality, and
-                timeless design excellence.
+                At Design A&apos; Line, our team of architects and designers
+                approaches each project with a holistic mindset. From bespoke
+                residences to dynamic commercial interiors, we strive to deliver
+                spaces that resonate with purpose, identity, and elegance.
+              </p>
+              <p>
+                Every detail we craft is a reflection of our commitment to
+                innovation, quality, and timeless design. As we continue to
+                evolve, our mission remains clear—shaping built environments
+                that leave a lasting impression.
               </p>
             </div>
           </div>

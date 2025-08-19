@@ -39,25 +39,26 @@ const Contact: React.FC = () => {
     {
       icon: Phone,
       label: "Phone",
-      value: "+1 (555) 123-4567",
-      href: "tel:+15551234567",
+      value: "+91 8333857444",
+      href: "tel:+918333857444",
     },
     {
       icon: Mail,
       label: "Email",
-      value: "hello@greenspace.design",
-      href: "mailto:hello@greenspace.design",
+      value: "info@designaline.com",
+      href: "mailto:info@designaline.com",
     },
     {
       icon: MapPin,
       label: "Address",
-      value: "123 Sustainable St, Eco City, CA 90210",
-      href: "https://maps.google.com",
+      value:
+        "50-24-11, TPT Colony, Balayyasasthri Layout, Seethamma dhara, Vishakapatnam, Andhra Pradesh",
+      href: "https://maps.app.goo.gl/wnzMPmKgdSEvptSQA",
     },
     {
       icon: Clock,
       label: "Business Hours",
-      value: "Mon-Fri: 9AM-6PM PST",
+      value: "Mon-Fri: 9AM-6PM IST",
       href: null,
     },
   ];

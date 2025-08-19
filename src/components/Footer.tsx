@@ -3,16 +3,25 @@
 import React from "react";
 import { Leaf, Instagram, Twitter, Linkedin, Youtube } from "lucide-react";
 import { useTheme } from "../contexts/ThemeContext";
+import Image from "next/image";
 // import { useTheme } from '@/contexts/ThemeContext'
 
 const Footer: React.FC = () => {
   const { isDark } = useTheme();
 
   const socialLinks = [
-    { icon: Instagram, href: "#", label: "Instagram" },
-    { icon: Twitter, href: "#", label: "Twitter" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Youtube, href: "#", label: "YouTube" },
+    {
+      icon: Instagram,
+      href: "https://www.instagram.com/designaline.in?igsh=MXRhMmhzOHp6YXg3ag%3D%3D&utm_source=qr",
+      label: "Instagram",
+    },
+    // { icon: Twitter, href: "#", label: "Twitter" },
+    {
+      icon: Linkedin,
+      href: "https://www.linkedin.com/company/designa-line",
+      label: "LinkedIn",
+    },
+    // { icon: Youtube, href: "#", label: "YouTube" },
   ];
 
   const footerSections = [
@@ -21,8 +30,8 @@ const Footer: React.FC = () => {
       links: [
         { label: "Sustainable Architecture", href: "#" },
         { label: "Interior Design", href: "#" },
-        { label: "Energy Consulting", href: "#" },
-        { label: "LEED Certification", href: "#" },
+        { label: "Landscape design", href: "#" },
+        // { label: "LEED Certification", href: "#" },
       ],
     },
     {
@@ -58,17 +67,26 @@ const Footer: React.FC = () => {
           {/* Brand Section */}
           <div className="lg:col-span-1">
             <div className="flex items-center space-x-3 mb-6">
-              <div className="p-2 bg-[#1B6B36] rounded-lg">
+              {/* <div className="p-2 bg-[#1B6B36] rounded-lg">
                 <Leaf className="text-white" size={24} />
-              </div>
+              </div> */}
+              <Image
+                src="/logo.png"
+                alt="GreenSpace Logo"
+                width={40}
+                height={40}
+                priority
+              />
               <div>
-                <h1 className="text-xl font-bold text-[#1B6B36]">GreenSpace</h1>
+                <h1 className="text-xl font-bold text-[#1B6B36]">
+                  DesignAline
+                </h1>
                 <p
                   className={`text-sm ${
                     isDark ? "text-gray-400" : "text-gray-600"
                   }`}
                 >
-                  Sustainable Architecture
+                  Architecture & Interiors
                 </p>
               </div>
             </div>
@@ -142,7 +160,7 @@ const Footer: React.FC = () => {
           <p
             className={`text-sm ${isDark ? "text-gray-400" : "text-gray-600"}`}
           >
-            © 2024 GreenSpace Architecture. All rights reserved.
+            © 2024 DesignAline. All rights reserved.
           </p>
 
           <div className="flex space-x-6 text-sm">

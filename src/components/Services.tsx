@@ -39,7 +39,7 @@ const Services: React.FC = () => {
         "Innovative architectural solutions that minimize environmental impact while maximizing functionality and beauty.",
       features: [
         "Green Building Design",
-        "LEED Certification",
+        "IGBC Certification",
         "Energy Modeling",
         "Renewable Integration",
       ],
@@ -56,18 +56,18 @@ const Services: React.FC = () => {
         "Natural Lighting",
       ],
     },
-    {
-      icon: Lightbulb,
-      title: "Energy Consulting",
-      description:
-        "Comprehensive energy efficiency analysis and solutions to reduce carbon footprint and operational costs.",
-      features: [
-        "Energy Audits",
-        "Solar Integration",
-        "Smart Systems",
-        "Cost Analysis",
-      ],
-    },
+    // {
+    //   icon: Lightbulb,
+    //   title: "Energy Consulting",
+    //   description:
+    //     "Comprehensive energy efficiency analysis and solutions to reduce carbon footprint and operational costs.",
+    //   features: [
+    //     "Energy Audits",
+    //     "Solar Integration",
+    //     "Smart Systems",
+    //     "Cost Analysis",
+    //   ],
+    // },
     {
       icon: TreePine,
       title: "Landscape Architecture",
@@ -113,7 +113,7 @@ const Services: React.FC = () => {
             }`}
             variants={cardVariants}
           >
-            Comprehensive <span className="text-[#1B6B36]">Sustainable</span>{" "}
+            Comprehensive <span className="text-[#1B6B36]">End to End</span>{" "}
             Solutions
           </motion.h2>
 
@@ -124,8 +124,8 @@ const Services: React.FC = () => {
             variants={cardVariants}
           >
             From initial concept to final construction, we provide end-to-end
-            sustainable design services that transform your vision into
-            environmentally responsible reality.
+            design services that transform your vision into environmentally
+            responsible reality.
           </motion.p>
         </motion.div>
 
@@ -155,7 +155,7 @@ const Services: React.FC = () => {
                 whileTap={{ scale: 0.98 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                <div className="flex items-start space-x-6">
+                <div className="flex flex-col gap-6 items-start space-x-6">
                   <div className="flex-shrink-0">
                     <motion.div
                       className="p-4 bg-[#1B6B36]/10 rounded-xl group-hover:bg-[#1B6B36]/20 transition-colors duration-300"

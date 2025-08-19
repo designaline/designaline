@@ -48,10 +48,10 @@ const Header: React.FC = () => {
               <h1 className="text-xl font-bold text-[#1B6B36]">DesignAline</h1>
               <p
                 className={`text-xs ${
-                  isDark ? "text-gray-400" : "text-gray-600"
+                  isDark ? "text-gray-400 font-bold" : "text-gray-600 font-bold"
                 }`}
               >
-                Sustainable Architecture & Interiors
+                Architecture & Interiors
               </p>
             </div>
           </motion.div>
