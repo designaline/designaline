@@ -61,7 +61,7 @@ const Hero: React.FC = () => {
         >
           {/* Content */}
           <div className="space-y-8 relative z-10">
-            <motion.div
+            {/* <motion.div
               className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-[#1B6B36]/10 border border-[#1B6B36]/20"
               variants={itemVariants}
               whileHover={{ scale: 1.05 }}
@@ -75,7 +75,7 @@ const Hero: React.FC = () => {
               >
                 Sustainable Design Leaders
               </span>
-            </motion.div>
+            </motion.div> */}
 
             <motion.div className="space-y-6" variants={itemVariants}>
               <motion.h1

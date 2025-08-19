@@ -1,6 +1,13 @@
-import type { Metadata } from "next";
+import { ThemeProvider } from "../contexts/ThemeContext";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+
+import AnimatedCursor from "../components/AnimatedCursor";
+import FloatingElements from "../components/FloatingElements";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+
+import type { Metadata } from "next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,7 +43,7 @@ export const metadata: Metadata = {
     siteName: "designALine",
     images: [
       {
-        url: "https://designaline.com/og-image.jpg", // replace with actual image
+        url: "https://designaline.com/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "designALine Architectural Projects",
@@ -50,7 +57,7 @@ export const metadata: Metadata = {
     title: "designALine | Architectural & Interior Design Studio",
     description:
       "Innovative architectural and interior design solutions by designALine. Explore our portfolio of modern and sustainable projects.",
-    images: ["https://designaline.com/og-image.jpg"], // replace with actual image
+    images: ["https://designaline.com/og-image.jpg"],
   },
   icons: {
     icon: "/favicon.ico",
@@ -62,15 +69,25 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <ThemeProvider>
+          <div className="min-h-screen">
+            <AnimatedCursor />
+            <FloatingElements />
+            <Header />
+
+            <main>{children}</main>
+
+            <Footer />
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -5,13 +5,14 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Sun, Moon, Menu, X } from "lucide-react";
 import { useTheme } from "../contexts/ThemeContext";
+import Link from "next/link";
 
 const Header: React.FC = () => {
   const { isDark, toggleTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const navItems = [
-    { label: "Home", href: "#home" },
+    { label: "Home", href: "/" },
     { label: "Services", href: "#services" },
     { label: "Portfolio", href: "#portfolio" },
     { label: "About", href: "#about" },
@@ -32,29 +33,35 @@ const Header: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <motion.div
-            className="flex items-center gap-2 cursor-pointer"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <Image
-              src="/logo.png"
-              alt="GreenSpace Logo"
-              width={40}
-              height={40}
-              priority
-            />
-            <div>
-              <h1 className="text-xl font-bold text-[#1B6B36]">DesignAline</h1>
-              <p
-                className={`text-xs ${
-                  isDark ? "text-gray-400 font-bold" : "text-gray-600 font-bold"
-                }`}
-              >
-                Architecture & Interiors
-              </p>
-            </div>
-          </motion.div>
+          <Link href="/">
+            <motion.div
+              className="flex items-center gap-2 cursor-pointer"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <Image
+                src="/logo.png"
+                alt="GreenSpace Logo"
+                width={40}
+                height={40}
+                priority
+              />
+              <div>
+                <h1 className="text-xl font-bold text-[#1B6B36]">
+                  DesignAline
+                </h1>
+                <p
+                  className={`text-xs ${
+                    isDark
+                      ? "text-gray-400 font-bold"
+                      : "text-gray-600 font-bold"
+                  }`}
+                >
+                  Architecture & Interiors
+                </p>
+              </div>
+            </motion.div>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
