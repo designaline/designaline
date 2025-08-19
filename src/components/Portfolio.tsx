@@ -1,10 +1,10 @@
 "use client";
 
-import React from "react";
 import { motion, Variants } from "framer-motion";
-import { ExternalLink, MapPin } from "lucide-react";
+import { MapPin } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import React from "react";
 import { useTheme } from "../contexts/ThemeContext";
 import { projects } from "../data/projects"; // ✅ import data
 

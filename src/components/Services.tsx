@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
 import { motion, Variants } from "framer-motion";
-import { Building, Home, Lightbulb, TreePine } from "lucide-react";
+import { Building, Home, TreePine } from "lucide-react";
+import React from "react";
 import { useTheme } from "../contexts/ThemeContext";
 // import { useTheme } from '@/contexts/ThemeContext'
 

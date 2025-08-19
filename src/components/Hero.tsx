@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
 import { motion, Variants } from "framer-motion";
-import { ArrowRight, Leaf, Home } from "lucide-react";
+import { ArrowRight, Home } from "lucide-react";
+import React from "react";
 // import { useTheme } from '@/contexts/ThemeContext'
 import Image from "next/image";
 import { useTheme } from "../contexts/ThemeContext";

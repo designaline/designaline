@@ -1,9 +1,9 @@
 "use client";
 
-import React from "react";
-import { Leaf, Instagram, Twitter, Linkedin, Youtube } from "lucide-react";
-import { useTheme } from "../contexts/ThemeContext";
+import { Instagram, Linkedin } from "lucide-react";
 import Image from "next/image";
+import React from "react";
+import { useTheme } from "../contexts/ThemeContext";
 // import { useTheme } from '@/contexts/ThemeContext'
 
 const Footer: React.FC = () => {
