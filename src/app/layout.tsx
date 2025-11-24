@@ -2,9 +2,6 @@ import { ThemeProvider } from "../contexts/ThemeContext";
 import { Geist, Geist_Mono } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
-
-import Script from "next/script";
-
 import AnimatedCursor from "../components/AnimatedCursor";
 import FloatingElements from "../components/FloatingElements";
 import Header from "../components/Header";
@@ -82,15 +79,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Google Tag Manager (GA + Ads) */}
-        <Script
+        {/* Google Tag Manager (GA +   Ads) */}
+        <script
           async
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
         />
 
-        <Script
+        <script
           id="gtag-init"
-          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
