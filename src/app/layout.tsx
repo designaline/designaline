@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 
+import Script from "next/script";
+
 import AnimatedCursor from "../components/AnimatedCursor";
 import FloatingElements from "../components/FloatingElements";
 import Header from "../components/Header";
@@ -19,6 +21,10 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+// ---- GOOGLE IDS ----
+const GA_MEASUREMENT_ID = "G-DH64WW77M5"; // Your GA ID
+const GOOGLE_ADS_ID = "AW-17669270068"; // Your Ads Conversion ID
 
 export const metadata: Metadata = {
   title: "designAline | Architectural & Interior Design Studio",
@@ -75,6 +81,32 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        {/* Google Tag Manager (GA + Ads) */}
+        <Script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+        />
+
+        <Script
+          id="gtag-init"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              // Google Analytics
+              gtag('config', '${GA_MEASUREMENT_ID}', { send_page_view: true });
+
+              // Google Ads
+              gtag('config', '${GOOGLE_ADS_ID}');
+            `,
+          }}
+        />
+      </head>
+
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
@@ -89,7 +121,9 @@ export default function RootLayout({
             <Footer />
           </div>
         </ThemeProvider>
-        <GoogleAnalytics gaId="G-DH64WW77M5" />
+
+        {/* GA Component (Next.js built-in) */}
+        <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />
       </body>
     </html>
   );
