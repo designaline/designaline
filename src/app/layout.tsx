@@ -1,5 +1,6 @@
 import { ThemeProvider } from "../contexts/ThemeContext";
 import { Geist, Geist_Mono } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 
 import AnimatedCursor from "../components/AnimatedCursor";
@@ -88,6 +89,7 @@ export default function RootLayout({
             <Footer />
           </div>
         </ThemeProvider>
+        <GoogleAnalytics gaId="G-DH64WW77M5" />
       </body>
     </html>
   );
