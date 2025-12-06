@@ -21,7 +21,7 @@ const geistMono = Geist_Mono({
 
 // ---- GOOGLE IDS ----
 const GA_MEASUREMENT_ID = "G-DH64WW77M5"; // Your GA ID
-const GOOGLE_ADS_ID = "AW-17669270068"; // Your Ads Conversion ID
+const GOOGLE_ADS_ID = "AW-17773734637"; // Your Ads Conversion ID
 
 export const metadata: Metadata = {
   title: "designAline | Architectural & Interior Design Studio",
