@@ -165,7 +165,7 @@ const Footer: React.FC = () => {
 
           <div className="flex space-x-6 text-sm">
             <a
-              href="#"
+              href="/privacy-policy"
               className={`transition-colors duration-200 hover:text-[#1B6B36] ${
                 isDark ? "text-gray-400" : "text-gray-600"
               }`}
@@ -173,7 +173,7 @@ const Footer: React.FC = () => {
               Privacy Policy
             </a>
             <a
-              href="#"
+              href="/terms-of-service"
               className={`transition-colors duration-200 hover:text-[#1B6B36] ${
                 isDark ? "text-gray-400" : "text-gray-600"
               }`}
@@ -181,7 +181,7 @@ const Footer: React.FC = () => {
               Terms of Service
             </a>
             <a
-              href="#"
+              href="/cookie-policy"
               className={`transition-colors duration-200 hover:text-[#1B6B36] ${
                 isDark ? "text-gray-400" : "text-gray-600"
               }`}
