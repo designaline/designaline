@@ -6,6 +6,10 @@ export interface Project {
   category: string;
   images: string[]; // changed from single `image`
   description: string;
+  caseStudy?: Array<{
+    title: string;
+    body: string;
+  }>;
 }
 
 export const projects: Project[] = [
@@ -66,7 +70,17 @@ export const projects: Project[] = [
     category: "Residential Villa",
     images: ["/projects/luxury_villas_1.png"],
     description:
-      "A 5BHK villa with a luxury contemporary aesthetic, crafted with modern materials and elements that highlight sophistication and comfort.",
+      "A 5BHK villa with a luxury contemporary aesthetic shaped around sophistication and comfort.",
+    caseStudy: [
+      {
+        title: "Project Overview",
+        body: "This residential villa in Vizag is planned as a 5BHK home with a contemporary luxury character.",
+      },
+      {
+        title: "Design Direction",
+        body: "The design direction focuses on a sophisticated, comfortable home expressed through a modern architectural aesthetic.",
+      },
+    ],
   },
   {
     slug: "cafe-cuppers",

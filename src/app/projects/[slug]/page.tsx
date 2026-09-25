@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { projects } from "../../../data/projects";
-import ProjectSlider from "@/components/ProjectSlider";
+import ProjectCaseStudy from "@/components/ProjectCaseStudy";
 
 type Params = { slug: string };
 
@@ -14,9 +14,9 @@ export default async function ProjectPage({
 
   if (!project) return notFound();
 
-  return (
-    <div className="w-full min-h-screen flex flex-col items-center justify-center bg-gray-50">
-      <ProjectSlider project={project} />
-    </div>
-  );
+  return <ProjectCaseStudy project={project} />;
+}
+
+export function generateStaticParams() {
+  return projects.map(({ slug }) => ({ slug }));
 }
