@@ -112,7 +112,7 @@ const About: React.FC = () => {
               }`}
             >
               <p>
-                Founded in 2020, Designaine was born from a bold vision: to
+                Founded in 2020, Design A&apos;Line was born from a bold vision: to
                 craft spaces that inspire, endure, and elevate everyday
                 experiences.
               </p>

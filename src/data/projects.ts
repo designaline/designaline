@@ -64,7 +64,7 @@ export const projects: Project[] = [
     title: "Luxury Villa",
     location: "Vizag",
     category: "Residential Villa",
-    images: ["/projects/luxury_villas_1.png", "/projects/luxury_villas_2.png"],
+    images: ["/projects/luxury_villas_1.png"],
     description:
       "A 5BHK villa with a luxury contemporary aesthetic, crafted with modern materials and elements that highlight sophistication and comfort.",
   },
@@ -78,7 +78,6 @@ export const projects: Project[] = [
       "/projects/cafeint/2.png",
       "/projects/cafeint/3.png",
       "/projects/cafeint/4.png",
-      "/projects/cafeint/5.png",
       "/projects/cafeint/6.png",
       "/projects/cafeint/7.png",
       "/projects/cafeint/8.png",

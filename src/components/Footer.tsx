@@ -15,41 +15,35 @@ const Footer: React.FC = () => {
       href: "https://www.instagram.com/designaline.in?igsh=MXRhMmhzOHp6YXg3ag%3D%3D&utm_source=qr",
       label: "Instagram",
     },
-    // { icon: Twitter, href: "#", label: "Twitter" },
     {
       icon: Linkedin,
       href: "https://www.linkedin.com/company/designa-line",
       label: "LinkedIn",
     },
-    // { icon: Youtube, href: "#", label: "YouTube" },
   ];
 
   const footerSections = [
     {
       title: "Services",
       links: [
-        { label: "Sustainable Architecture", href: "#" },
-        { label: "Interior Design", href: "#" },
-        { label: "Landscape design", href: "#" },
-        // { label: "LEED Certification", href: "#" },
+        { label: "Sustainable Architecture", href: "/#services" },
+        { label: "Interior Design", href: "/#services" },
+        { label: "Landscape Design", href: "/#services" },
       ],
     },
     {
       title: "Company",
       links: [
-        { label: "About Us", href: "#about" },
-        { label: "Our Team", href: "#about" },
-        { label: "Careers", href: "#" },
-        { label: "Press", href: "#" },
+        { label: "About Us", href: "/#about" },
+        { label: "Our Team", href: "/#about" },
+        { label: "Contact", href: "/#contact" },
       ],
     },
     {
       title: "Resources",
       links: [
-        { label: "Portfolio", href: "#portfolio" },
-        { label: "Case Studies", href: "#" },
-        { label: "Blog", href: "#" },
-        { label: "Sustainability Guide", href: "#" },
+        { label: "Portfolio", href: "/#portfolio" },
+        { label: "Luxury Villa", href: "/projects/luxury-villa" },
       ],
     },
   ];
@@ -72,7 +66,7 @@ const Footer: React.FC = () => {
               </div> */}
               <Image
                 src="/logo.png"
-                alt="GreenSpace Logo"
+                alt="Design A'Line logo"
                 width={40}
                 height={40}
                 priority
@@ -160,7 +154,7 @@ const Footer: React.FC = () => {
           <p
             className={`text-sm ${isDark ? "text-gray-400" : "text-gray-600"}`}
           >
-            © 2024 DesignAline. All rights reserved.
+            © {new Date().getFullYear()} Design A&apos;Line. All rights reserved.
           </p>
 
           <div className="flex space-x-6 text-sm">

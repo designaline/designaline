@@ -13,10 +13,10 @@ const Header: React.FC = () => {
 
   const navItems = [
     { label: "Home", href: "/" },
-    { label: "Services", href: "#services" },
-    { label: "Portfolio", href: "#portfolio" },
-    { label: "About", href: "#about" },
-    { label: "Contact", href: "#contact" },
+    { label: "Services", href: "/#services" },
+    { label: "Portfolio", href: "/#portfolio" },
+    { label: "About", href: "/#about" },
+    { label: "Contact", href: "/#contact" },
   ];
 
   return (
@@ -41,7 +41,7 @@ const Header: React.FC = () => {
             >
               <Image
                 src="/logo.png"
-                alt="GreenSpace Logo"
+                alt="Design A'Line logo"
                 width={40}
                 height={40}
                 priority
@@ -84,6 +84,8 @@ const Header: React.FC = () => {
           {/* Theme Toggle & Mobile Menu */}
           <div className="flex items-center space-x-4">
             <motion.button
+              type="button"
+              aria-label={isDark ? "Use light theme" : "Use dark theme"}
               onClick={toggleTheme}
               className={`p-2 rounded-lg transition-colors duration-200 ${
                 isDark
@@ -100,6 +102,9 @@ const Header: React.FC = () => {
 
             {/* Mobile Menu Button */}
             <motion.button
+              type="button"
+              aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={isMenuOpen}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className={`md:hidden p-2 rounded-lg transition-colors duration-200 ${
                 isDark

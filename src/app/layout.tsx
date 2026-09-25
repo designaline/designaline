@@ -45,14 +45,6 @@ export const metadata: Metadata = {
       "Shaping spaces that inspire. designALine delivers architectural and interior design solutions blending creativity, functionality, and sustainability.",
     url: "https://designaline.com",
     siteName: "designALine",
-    images: [
-      {
-        url: "https://designaline.com/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "designALine Architectural Projects",
-      },
-    ],
     locale: "en_US",
     type: "website",
   },
@@ -61,12 +53,10 @@ export const metadata: Metadata = {
     title: "designALine | Architectural & Interior Design Studio",
     description:
       "Innovative architectural and interior design solutions by designALine. Explore our portfolio of modern and sustainable projects.",
-    images: ["https://designaline.com/og-image.jpg"],
   },
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
   },
   metadataBase: new URL("https://designaline.com"),
 };

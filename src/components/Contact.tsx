@@ -199,7 +199,7 @@ const Contact: React.FC = () => {
             >
               <Image
                 src="https://images.pexels.com/photos/3760069/pexels-photo-3760069.jpeg"
-                alt="GreenSpace office"
+                alt="Design A'Line architects discussing a project"
                 width={600}
                 height={450}
                 className="w-full h-full object-cover"
