@@ -89,9 +89,9 @@ const About: React.FC = () => {
               isDark ? "text-gray-300" : "text-gray-600"
             }`}
           >
-            For over 5+ years, Design A’ line has been at the forefront of
-            sustainable architecture and interior design, creating spaces that
-            harmonize with nature while exceeding client expectations.
+            Design A&apos;Line brings architecture and interior design together to
+            create thoughtful spaces that harmonize with their context and the
+            people who use them.
           </p>
         </div>
 
@@ -142,8 +142,8 @@ const About: React.FC = () => {
           <div className="relative">
             <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
               <Image
-                src="https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg"
-                alt="Team collaboration"
+                src="/projects/somaabode/1.jpg"
+                alt="Design A'Line residential architecture project"
                 width={600}
                 height={450}
                 className="w-full h-full object-cover"

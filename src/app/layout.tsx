@@ -6,6 +6,7 @@ import AnimatedCursor from "../components/AnimatedCursor";
 import FloatingElements from "../components/FloatingElements";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import MobileActionBar from "../components/MobileActionBar";
 
 import type { Metadata } from "next";
 
@@ -97,7 +98,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ThemeProvider>
-          <div className="min-h-screen">
+          <div className="min-h-screen pb-20 md:pb-0">
             <AnimatedCursor />
             <FloatingElements />
             <Header />
@@ -105,6 +106,7 @@ export default function RootLayout({
             <main>{children}</main>
 
             <Footer />
+            <MobileActionBar />
           </div>
         </ThemeProvider>
 

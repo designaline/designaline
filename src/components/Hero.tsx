@@ -1,10 +1,11 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import { ArrowRight, Home } from "lucide-react";
+import { ArrowRight, CalendarDays } from "lucide-react";
 import React from "react";
 // import { useTheme } from '@/contexts/ThemeContext'
 import Image from "next/image";
+import Link from "next/link";
 import { useTheme } from "../contexts/ThemeContext";
 
 const Hero: React.FC = () => {
@@ -61,22 +62,6 @@ const Hero: React.FC = () => {
         >
           {/* Content */}
           <div className="space-y-8 relative z-10">
-            {/* <motion.div
-              className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-[#1B6B36]/10 border border-[#1B6B36]/20"
-              variants={itemVariants}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Leaf className="text-[#1B6B36]" size={16} />
-              <span
-                className={`text-sm font-medium ${
-                  isDark ? "text-gray-300" : "text-gray-700"
-                }`}
-              >
-                Sustainable Design Leaders
-              </span>
-            </motion.div> */}
-
             <motion.div className="space-y-6" variants={itemVariants}>
               <motion.h1
                 className={`text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight ${
@@ -100,14 +85,23 @@ const Hero: React.FC = () => {
                 Future
               </motion.h1>
 
+              <motion.h2
+                className={`text-2xl sm:text-3xl font-semibold leading-tight ${
+                  isDark ? "text-gray-100" : "text-gray-800"
+                }`}
+                variants={itemVariants}
+              >
+                Architecture &amp; Interior Design in Visakhapatnam
+              </motion.h2>
+
               <motion.p
                 className={`text-xl leading-relaxed ${
                   isDark ? "text-gray-300" : "text-gray-600"
                 }`}
               >
-                We specialize in eco-friendly architecture and interior design
-                that harmonizes with nature while creating beautiful, functional
-                spaces for modern living.
+                Thoughtful, climate-responsive spaces shaped around how you
+                live and work—balancing function, comfort, and a timeless
+                architectural character.
               </motion.p>
             </motion.div>
 
@@ -115,108 +109,31 @@ const Hero: React.FC = () => {
               className="flex flex-col sm:flex-row gap-4"
               variants={itemVariants}
             >
-              <motion.button
-                className="inline-flex items-center justify-center px-8 py-4 bg-[#1B6B36] text-white font-semibold rounded-lg shadow-lg"
-                whileHover={{
-                  scale: 1.05,
-                  backgroundColor: "#155a2e",
-                  boxShadow:
-                    "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
-                }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 300 }}
-                data-cursor="pointer"
-              >
-                View Our Projects
-                <motion.div
-                  animate={{ x: [0, 5, 0] }}
-                  transition={{ repeat: Infinity, duration: 1.5 }}
+              <Link href="/#contact" className="inline-flex">
+                <motion.span
+                  className="inline-flex w-full items-center justify-center px-8 py-4 bg-[#1B6B36] text-white font-semibold rounded-lg shadow-lg"
+                  whileHover={{ scale: 1.03, backgroundColor: "#155a2e" }}
+                  whileTap={{ scale: 0.98 }}
                 >
+                  <CalendarDays className="mr-2" size={20} />
+                  Book a Consultation
+                </motion.span>
+              </Link>
+
+              <Link href="/#portfolio" className="inline-flex">
+                <motion.span
+                  className="inline-flex w-full items-center justify-center px-8 py-4 border-2 border-[#1B6B36] text-[#1B6B36] font-semibold rounded-lg transition-colors duration-200"
+                  whileHover={{
+                    scale: 1.03,
+                    backgroundColor: "#1B6B36",
+                    color: "#ffffff",
+                  }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  View Our Projects
                   <ArrowRight className="ml-2" size={20} />
-                </motion.div>
-              </motion.button>
-
-              <motion.button
-                className={`inline-flex items-center justify-center px-8 py-4 border-2 border-[#1B6B36] text-[#1B6B36] font-semibold rounded-lg transition-all duration-200`}
-                whileHover={{
-                  scale: 1.05,
-                  backgroundColor: "#1B6B36",
-                  color: "#ffffff",
-                }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 300 }}
-                data-cursor="pointer"
-              >
-                <Home className="mr-2" size={20} />
-                Our Services
-              </motion.button>
-            </motion.div>
-
-            {/* Stats */}
-            <motion.div
-              className="grid grid-cols-3 gap-8 pt-8 border-t border-gray-200/20"
-              variants={itemVariants}
-            >
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <motion.div
-                  className="text-3xl font-bold text-[#1B6B36]"
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 1.5, duration: 0.5 }}
-                >
-                  150+
-                </motion.div>
-                <div
-                  className={`text-sm ${
-                    isDark ? "text-gray-400" : "text-gray-600"
-                  }`}
-                >
-                  Projects Completed
-                </div>
-              </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <motion.div
-                  className="text-3xl font-bold text-[#1B6B36]"
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 1.7, duration: 0.5 }}
-                >
-                  5+
-                </motion.div>
-                <div
-                  className={`text-sm ${
-                    isDark ? "text-gray-400" : "text-gray-600"
-                  }`}
-                >
-                  Years Experience
-                </div>
-              </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <motion.div
-                  className="text-3xl font-bold text-[#1B6B36]"
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 1.9, duration: 0.5 }}
-                >
-                  90+{" "}
-                </motion.div>
-                <div
-                  className={`text-sm ${
-                    isDark ? "text-gray-400" : "text-gray-600"
-                  }`}
-                >
-                  Happy Customers{" "}
-                </div>
-              </motion.div>
+                </motion.span>
+              </Link>
             </motion.div>
           </div>
 
@@ -228,54 +145,14 @@ const Hero: React.FC = () => {
               transition={{ type: "spring", stiffness: 300 }}
             >
               <Image
-                src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg"
-                alt="Sustainable modern architecture"
+                src="/projects/luxury_villas_1.png"
+                alt="Design A'Line residential villa project in Visakhapatnam"
                 width={600}
                 height={750}
                 className="w-full h-full object-cover"
                 priority
               />
             </motion.div>
-
-            {/* Floating Card */}
-            {/* <motion.div
-              className={`absolute -bottom-6 -left-6 p-6 rounded-xl shadow-2xl ${
-                isDark ? "bg-gray-800 border border-gray-700" : "bg-white"
-              }`}
-              initial={{ opacity: 0, y: 20, x: -20 }}
-              animate={{ opacity: 1, y: 0, x: 0 }}
-              transition={{ delay: 1.2, duration: 0.8 }}
-              whileHover={{
-                scale: 1.05,
-                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-              }}
-            >
-              <div className="flex items-center space-x-4">
-                <motion.div
-                  className="p-3 bg-[#1B6B36]/10 rounded-lg"
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <Leaf className="text-[#1B6B36]" size={24} />
-                </motion.div>
-                <div>
-                  <div
-                    className={`font-semibold ${
-                      isDark ? "text-white" : "text-gray-900"
-                    }`}
-                  >
-                    LEED Certified
-                  </div>
-                  <div
-                    className={`text-sm ${
-                      isDark ? "text-gray-400" : "text-gray-600"
-                    }`}
-                  >
-                    Gold Standard
-                  </div>
-                </div>
-              </div>
-            </motion.div> */}
           </motion.div>
         </motion.div>
       </div>
