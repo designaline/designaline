@@ -1,94 +1,65 @@
-'use client'
+"use client";
 
-import React, { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
-const AnimatedCursor: React.FC = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const [isHovering, setIsHovering] = useState(false)
-  const [mounted, setMounted] = useState(false)
+export default function AnimatedCursor() {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    setMounted(true)
-    
-    const updateMousePosition = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY })
-    }
+    const finePointer = window.matchMedia("(pointer: fine)");
+    if (!finePointer.matches) return;
 
-    const handleMouseEnter = () => setIsHovering(true)
-    const handleMouseLeave = () => setIsHovering(false)
+    const updateMousePosition = (event: MouseEvent) => {
+      setMousePosition({ x: event.clientX, y: event.clientY });
+      setIsVisible(true);
+    };
+    const updateHoverState = (event: MouseEvent) => {
+      const target = event.target;
+      setIsHovering(
+        target instanceof Element &&
+          Boolean(target.closest("button, a, [data-cursor='pointer']")),
+      );
+    };
+    const hideCursor = () => setIsVisible(false);
 
-    // Add event listeners for interactive elements
-    const addListeners = () => {
-      const interactiveElements = document.querySelectorAll('button, a, [data-cursor="pointer"]')
-      
-      interactiveElements.forEach(el => {
-        el.addEventListener('mouseenter', handleMouseEnter)
-        el.addEventListener('mouseleave', handleMouseLeave)
-      })
-
-      return interactiveElements
-    }
-
-    const interactiveElements = addListeners()
-    window.addEventListener('mousemove', updateMousePosition)
-
-    // Re-add listeners when DOM changes
-    const observer = new MutationObserver(() => {
-      const newElements = addListeners()
-      newElements.forEach(el => {
-        el.addEventListener('mouseenter', handleMouseEnter)
-        el.addEventListener('mouseleave', handleMouseLeave)
-      })
-    })
-
-    observer.observe(document.body, { childList: true, subtree: true })
+    window.addEventListener("mousemove", updateMousePosition);
+    document.addEventListener("mouseover", updateHoverState);
+    document.documentElement.addEventListener("mouseleave", hideCursor);
 
     return () => {
-      window.removeEventListener('mousemove', updateMousePosition)
-      interactiveElements.forEach(el => {
-        el.removeEventListener('mouseenter', handleMouseEnter)
-        el.removeEventListener('mouseleave', handleMouseLeave)
-      })
-      observer.disconnect()
-    }
-  }, [])
+      window.removeEventListener("mousemove", updateMousePosition);
+      document.removeEventListener("mouseover", updateHoverState);
+      document.documentElement.removeEventListener("mouseleave", hideCursor);
+    };
+  }, []);
 
-  if (!mounted) return null
+  if (!isVisible) return null;
 
   return (
     <>
-      {/* Main cursor */}
       <motion.div
-        className="fixed top-0 left-0 w-4 h-4 bg-[#1B6B36] rounded-full pointer-events-none z-50 mix-blend-difference will-change-transform"
+        aria-hidden="true"
+        className="pointer-events-none fixed left-0 top-0 z-50 h-4 w-4 rounded-full bg-[#1B6B36] mix-blend-difference will-change-transform"
         animate={{
           x: mousePosition.x - 8,
           y: mousePosition.y - 8,
           scale: isHovering ? 1.5 : 1,
         }}
-        transition={{
-          type: "spring",
-          stiffness: 500,
-          damping: 28,
-        }}
+        transition={{ type: "spring", stiffness: 500, damping: 28 }}
       />
-      
-      {/* Trailing cursor */}
       <motion.div
-        className="fixed top-0 left-0 w-8 h-8 border-2 border-[#1B6B36]/30 rounded-full pointer-events-none z-40 will-change-transform"
+        aria-hidden="true"
+        className="pointer-events-none fixed left-0 top-0 z-40 h-8 w-8 rounded-full border-2 border-[#1B6B36]/30 will-change-transform"
         animate={{
           x: mousePosition.x - 16,
           y: mousePosition.y - 16,
           scale: isHovering ? 2 : 1,
         }}
-        transition={{
-          type: "spring",
-          stiffness: 150,
-          damping: 15,
-        }}
+        transition={{ type: "spring", stiffness: 150, damping: 15 }}
       />
     </>
-  )
+  );
 }
-
-export default AnimatedCursor

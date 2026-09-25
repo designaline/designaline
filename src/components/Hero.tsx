@@ -49,7 +49,7 @@ const Hero: React.FC = () => {
   return (
     <section
       id="home"
-      className={`min-h-screen flex items-center ${
+      className={`min-h-screen flex items-center pb-12 pt-24 ${
         isDark ? "bg-gray-900" : "bg-white"
       }`}
     >

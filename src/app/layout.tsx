@@ -1,5 +1,4 @@
 import { ThemeProvider } from "../contexts/ThemeContext";
-import { Geist, Geist_Mono } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 import AnimatedCursor from "../components/AnimatedCursor";
@@ -9,16 +8,6 @@ import Footer from "../components/Footer";
 import MobileActionBar from "../components/MobileActionBar";
 
 import type { Metadata } from "next";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 // ---- GOOGLE IDS ----
 const GA_MEASUREMENT_ID = "G-DH64WW77M5"; // Your GA ID
@@ -94,9 +83,7 @@ export default function RootLayout({
         />
       </head>
 
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className="antialiased">
         <ThemeProvider>
           <div className="min-h-screen pb-20 md:pb-0">
             <AnimatedCursor />

@@ -24,11 +24,12 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-      setIsDark(savedTheme === "dark");
-    }
+    const frame = window.requestAnimationFrame(() => {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme) setIsDark(savedTheme === "dark");
+      setMounted(true);
+    });
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   const toggleTheme = () => {
@@ -43,13 +44,11 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
 
   return (
     <ThemeContext.Provider value={{ isDark, toggleTheme }}>
-      {/* Full-width background */}
       <div
         className={`min-h-screen transition-colors duration-300 ${
           isDark ? "bg-gray-900 text-white" : "bg-white text-black"
         }`}
       >
-        {/* Centered + max width content */}
         <div className="max-w-7xl mx-auto px-4">{children}</div>
       </div>
     </ThemeContext.Provider>
