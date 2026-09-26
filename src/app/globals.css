@@ -27,17 +27,6 @@
     }
   }
 }
-/* Custom cursor styles */
-* {
-  cursor: none;
-}
-
-button,
-a,
-[data-cursor="pointer"] {
-  cursor: none;
-}
-
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
@@ -107,15 +96,6 @@ body {
 
 section[id] {
   scroll-margin-top: 4rem;
-}
-
-@media (pointer: coarse) {
-  *,
-  button,
-  a,
-  [data-cursor="pointer"] {
-    cursor: auto;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

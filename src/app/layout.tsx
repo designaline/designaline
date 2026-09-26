@@ -1,7 +1,6 @@
 import { ThemeProvider } from "../contexts/ThemeContext";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
-import AnimatedCursor from "../components/AnimatedCursor";
 import FloatingElements from "../components/FloatingElements";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -86,7 +85,6 @@ export default function RootLayout({
       <body className="antialiased">
         <ThemeProvider>
           <div className="min-h-screen pb-20 md:pb-0">
-            <AnimatedCursor />
             <FloatingElements />
             <Header />
 
