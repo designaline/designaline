@@ -1,163 +1,47 @@
 "use client";
 
-import { motion, Variants } from "framer-motion";
-import { ArrowRight, CalendarDays } from "lucide-react";
-import React from "react";
-// import { useTheme } from '@/contexts/ThemeContext'
 import Image from "next/image";
 import Link from "next/link";
-import { useTheme } from "../contexts/ThemeContext";
+import { ArrowDownRight, ArrowUpRight } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
 
-const Hero: React.FC = () => {
-  const { isDark } = useTheme();
-
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
-    },
-  };
-
-  const imageVariants: Variants = {
-    hidden: { opacity: 0, scale: 0.8, x: 50 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      x: 0,
-      transition: {
-        duration: 1,
-        ease: "easeOut",
-      },
-    },
-  };
+export default function Hero() {
+  const reduceMotion = useReducedMotion();
+  const entrance = reduceMotion ? {} : { initial: { opacity: 0, y: 24 }, animate: { opacity: 1, y: 0 } };
 
   return (
-    <section
-      id="home"
-      className={`min-h-screen flex items-center pb-12 pt-24 ${
-        isDark ? "bg-gray-900" : "bg-white"
-      }`}
-    >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          {/* Content */}
-          <div className="space-y-8 relative z-10">
-            <motion.div className="space-y-6" variants={itemVariants}>
-              <motion.h1
-                className={`text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight ${
-                  isDark ? "text-white" : "text-gray-900"
-                }`}
-              >
-                Building a{" "}
-                <motion.span
-                  className="text-[#1B6B36] relative"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  Sustainable
-                  <motion.div
-                    className="absolute -bottom-2 left-0 right-0 h-1 bg-[#1B6B36]/30 rounded"
-                    initial={{ width: 0 }}
-                    animate={{ width: "100%" }}
-                    transition={{ delay: 1, duration: 0.8 }}
-                  />
-                </motion.span>{" "}
-                Future
-              </motion.h1>
+    <section id="home" className="relative overflow-hidden bg-[#f5f1e8] pb-16 pt-28 text-[#17271e] lg:min-h-screen lg:pb-10 lg:pt-28">
+      <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
+        <div className="mb-10 flex items-center justify-between border-b border-[#173b2a]/15 pb-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#657268]">
+          <span>Architecture · Interior Design</span>
+          <span className="hidden sm:block">Visakhapatnam, India</span>
+        </div>
 
-              <motion.h2
-                className={`text-2xl sm:text-3xl font-semibold leading-tight ${
-                  isDark ? "text-gray-100" : "text-gray-800"
-                }`}
-                variants={itemVariants}
-              >
-                Architecture &amp; Interior Design in Visakhapatnam
-              </motion.h2>
-
-              <motion.p
-                className={`text-xl leading-relaxed ${
-                  isDark ? "text-gray-300" : "text-gray-600"
-                }`}
-              >
-                Thoughtful, climate-responsive spaces shaped around how you
-                live and work—balancing function, comfort, and a timeless
-                architectural character.
-              </motion.p>
-            </motion.div>
-
-            <motion.div
-              className="flex flex-col sm:flex-row gap-4"
-              variants={itemVariants}
-            >
-              <Link href="/#contact" className="inline-flex">
-                <motion.span
-                  className="inline-flex w-full items-center justify-center px-8 py-4 bg-[#1B6B36] text-white font-semibold rounded-lg shadow-lg"
-                  whileHover={{ scale: 1.03, backgroundColor: "#155a2e" }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <CalendarDays className="mr-2" size={20} />
-                  Book a Consultation
-                </motion.span>
-              </Link>
-
-              <Link href="/#portfolio" className="inline-flex">
-                <motion.span
-                  className="inline-flex w-full items-center justify-center px-8 py-4 border-2 border-[#1B6B36] text-[#1B6B36] font-semibold rounded-lg transition-colors duration-200"
-                  whileHover={{
-                    scale: 1.03,
-                    backgroundColor: "#1B6B36",
-                    color: "#ffffff",
-                  }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  View Our Projects
-                  <ArrowRight className="ml-2" size={20} />
-                </motion.span>
-              </Link>
-            </motion.div>
-          </div>
-
-          {/* Image */}
-          <motion.div className="relative" variants={imageVariants}>
-            <motion.div
-              className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl"
-              whileHover={{ scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <Image
-                src="/projects/luxury_villas_1.png"
-                alt="Design A'Line residential villa project in Visakhapatnam"
-                width={600}
-                height={750}
-                className="w-full h-full object-cover"
-                priority
-              />
-            </motion.div>
+        <div className="grid items-end gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+          <motion.div {...entrance} transition={{ duration: 0.8, ease: "easeOut" }} className="relative z-10 lg:pb-10">
+            <p className="mb-7 max-w-md text-sm font-semibold uppercase tracking-[0.18em] text-[#477058]">Building a sustainable future</p>
+            <h1 className="font-display text-[clamp(3.35rem,7vw,7.2rem)] leading-[0.9] tracking-[-0.055em]">
+              Spaces that<br />belong to the<br /><em className="font-normal text-[#356747]">way you live.</em>
+            </h1>
+            <p className="mt-8 max-w-xl text-lg leading-8 text-[#526158] sm:text-xl">We shape climate-responsive architecture and interiors as one continuous experience—from understanding the site to guiding its construction.</p>
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <Link href="/#contact" className="inline-flex min-h-13 items-center justify-between gap-8 rounded-full bg-[#173b2a] px-7 py-4 font-semibold text-white transition-transform hover:-translate-y-0.5">Begin your project <ArrowUpRight size={19} /></Link>
+              <Link href="/#process" className="inline-flex min-h-13 items-center justify-between gap-8 rounded-full border border-[#173b2a]/30 px-7 py-4 font-semibold text-[#173b2a] transition-colors hover:bg-white/60">Explore our process <ArrowDownRight size={19} /></Link>
+            </div>
           </motion.div>
-        </motion.div>
+
+          <motion.div initial={reduceMotion ? undefined : { opacity: 0, scale: 1.03 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.1, ease: "easeOut" }} className="relative">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-t-[8rem] rounded-b-2xl bg-[#d8d8cf] sm:aspect-[5/5] lg:aspect-[4/5]">
+              <Image src="/projects/luxury_villas_1.png" alt="Contemporary residential villa designed by Design A'Line" fill priority sizes="(max-width: 1024px) 100vw, 55vw" className="object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0f2418]/35 via-transparent to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-6 text-white sm:p-8">
+                <div><p className="text-xs uppercase tracking-[0.18em] text-white/75">Selected work</p><p className="mt-1 text-xl font-semibold">Luxury Villa · Vizag</p></div>
+                <span className="grid h-12 w-12 place-items-center rounded-full border border-white/50 bg-black/10 backdrop-blur"><ArrowUpRight size={20} /></span>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
-};
-
-export default Hero;
+}

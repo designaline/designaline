@@ -4,7 +4,6 @@ import { type FormEvent, type ReactNode, useState } from "react";
 import { Clock, Mail, MapPin, MessageCircle, Phone, Send } from "lucide-react";
 import { motion } from "framer-motion";
 import { contact, createWhatsAppUrl } from "@/config/contact";
-import { useTheme } from "@/contexts/ThemeContext";
 
 const services = ["Architecture", "Interior Design", "Architecture + Interiors", "Renovation", "Other"] as const;
 
@@ -58,12 +57,11 @@ function buildLeadMessage(values: FormValues) {
 }
 
 export default function Contact() {
-  const { isDark } = useTheme();
   const [values, setValues] = useState<FormValues>(initialValues);
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const fieldClass = `w-full rounded-lg border px-4 py-3 transition-colors focus:border-[#1B6B36] focus:ring-2 focus:ring-[#1B6B36]/20 ${isDark ? "border-gray-600 bg-gray-900 text-white placeholder:text-gray-500" : "border-gray-300 bg-white text-gray-900 placeholder:text-gray-400"}`;
+  const fieldClass = "w-full border-0 border-b border-white/25 bg-transparent px-0 py-3 text-white outline-none placeholder:text-white/35 focus:border-[#b8d1bc] focus:ring-0";
 
   function updateField(field: keyof FormValues, value: string) {
     setValues((current) => ({ ...current, [field]: value }));
@@ -103,31 +101,30 @@ export default function Contact() {
   ];
 
   return (
-    <motion.section id="contact" className={`py-20 ${isDark ? "bg-gray-900" : "bg-white"}`} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.1 }}>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto mb-14 max-w-3xl text-center">
-          <span className="mb-5 inline-flex rounded-full border border-[#1B6B36]/20 bg-[#1B6B36]/10 px-4 py-2 text-sm font-medium">Book a Consultation</span>
-          <h2 className={`mb-5 text-4xl font-bold lg:text-5xl ${isDark ? "text-white" : "text-gray-900"}`}>Tell Us About Your <span className="text-[#1B6B36]">Project</span></h2>
-          <p className={`text-lg leading-relaxed ${isDark ? "text-gray-300" : "text-gray-600"}`}>Share the essentials below. We&apos;ll prepare a WhatsApp message for you to review and send directly to Design A&apos;Line.</p>
+    <motion.section id="contact" className="bg-[#10291c] py-24 text-white sm:py-32" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.1 }}>
+      <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
+        <div className="mb-16 grid gap-8 lg:grid-cols-2">
+          <div><span className="mb-5 block text-xs font-semibold uppercase tracking-[0.22em] text-[#a9c5ae]">Begin a project</span><h2 className="font-display text-5xl leading-[0.98] tracking-[-0.04em] sm:text-7xl">Every meaningful space begins with a conversation.</h2></div>
+          <p className="max-w-xl self-end text-lg leading-8 text-white/65">Tell us about your site, priorities, and timeline. We&apos;ll prepare a WhatsApp message for you to review and send directly to Design A&apos;Line.</p>
         </div>
 
         <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
           <div>
-            <h3 className={`mb-6 text-2xl font-semibold ${isDark ? "text-white" : "text-gray-900"}`}>Contact Information</h3>
+            <h3 className="mb-8 font-display text-3xl">Visit or speak with us</h3>
             <div className="space-y-6">
               {contactItems.map(({ icon: Icon, label, value, href }) => (
                 <div key={label} className="flex items-start gap-4">
-                  <span className="rounded-lg bg-[#1B6B36]/10 p-3 text-[#1B6B36]"><Icon size={20} aria-hidden="true" /></span>
+                  <span className="rounded-full border border-white/20 p-3 text-[#b8d1bc]"><Icon size={20} aria-hidden="true" /></span>
                   <div>
-                    <h4 className={`mb-1 font-semibold ${isDark ? "text-white" : "text-gray-900"}`}>{label}</h4>
-                    {href ? <a href={href} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noreferrer" : undefined} className={`leading-relaxed hover:text-[#1B6B36] ${isDark ? "text-gray-300" : "text-gray-600"}`}>{value}</a> : <p className={isDark ? "text-gray-300" : "text-gray-600"}>{value}</p>}
+                    <h4 className="mb-1 text-sm font-semibold uppercase tracking-[0.12em] text-white/45">{label}</h4>
+                    {href ? <a href={href} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noreferrer" : undefined} className="leading-relaxed text-white/75 hover:text-white">{value}</a> : <p className="text-white/75">{value}</p>}
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className={`rounded-2xl p-6 sm:p-8 ${isDark ? "border border-gray-700 bg-gray-800" : "bg-gray-50"}`}>
+          <div className="rounded-2xl border border-white/15 bg-white/[0.04] p-6 sm:p-8 lg:p-10">
             <form onSubmit={handleSubmit} noValidate>
               <div className="grid gap-5 sm:grid-cols-2">
                 <Field id="lead-name" label="Name" required error={errors.name}><input id="lead-name" name="name" autoComplete="name" value={values.name} onChange={(e) => updateField("name", e.target.value)} className={fieldClass} aria-invalid={Boolean(errors.name)} aria-describedby={errors.name ? "lead-name-error" : undefined} /></Field>
@@ -142,8 +139,8 @@ export default function Contact() {
 
               {errors.submit && <div role="alert" className="mt-5 rounded-lg border border-red-300 bg-red-50 p-4 text-sm text-red-800"><p>{errors.submit}</p><div className="mt-3 flex flex-wrap gap-4 font-semibold"><a href={createWhatsAppUrl()} target="_blank" rel="noreferrer" className="underline">Open WhatsApp</a><a href={contact.phoneHref} className="underline">Call {contact.phoneDisplay}</a></div></div>}
 
-              <p className={`mt-5 text-sm ${isDark ? "text-gray-400" : "text-gray-600"}`}>WhatsApp will open with your details. Review the message, then tap Send—nothing is submitted automatically.</p>
-              <button type="submit" disabled={isSubmitting} className="mt-5 inline-flex min-h-12 w-full items-center justify-center rounded-lg bg-[#1B6B36] px-8 py-3 font-semibold text-white shadow-lg transition-colors hover:bg-[#155a2e] disabled:cursor-wait disabled:opacity-70">{isSubmitting ? "Preparing WhatsApp…" : "Continue to WhatsApp"}{isSubmitting ? <MessageCircle className="ml-2" size={20} aria-hidden="true" /> : <Send className="ml-2" size={20} aria-hidden="true" />}</button>
+              <p className="mt-5 text-sm text-white/50">WhatsApp will open with your details. Review the message, then tap Send—nothing is submitted automatically.</p>
+              <button type="submit" disabled={isSubmitting} className="mt-6 inline-flex min-h-13 w-full items-center justify-center rounded-full bg-[#dce8dd] px-8 py-4 font-semibold text-[#173b2a] transition-transform hover:-translate-y-0.5 disabled:cursor-wait disabled:opacity-70">{isSubmitting ? "Preparing WhatsApp…" : "Continue to WhatsApp"}{isSubmitting ? <MessageCircle className="ml-2" size={20} aria-hidden="true" /> : <Send className="ml-2" size={20} aria-hidden="true" />}</button>
             </form>
           </div>
         </div>

@@ -1,7 +1,5 @@
-import { ThemeProvider } from "../contexts/ThemeContext";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
-import FloatingElements from "../components/FloatingElements";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import MobileActionBar from "../components/MobileActionBar";
@@ -13,9 +11,9 @@ const GA_MEASUREMENT_ID = "G-DH64WW77M5"; // Your GA ID
 const GOOGLE_ADS_ID = "AW-17825264513"; // Your Ads Conversion ID
 
 export const metadata: Metadata = {
-  title: "designAline | Architectural & Interior Design Studio",
+  title: "Design A'Line | Architecture & Interior Design in Visakhapatnam",
   description:
-    "designALine is an innovative architectural and interior design firm creating modern, sustainable, and timeless spaces tailored to your vision.",
+    "Design A'Line creates site-responsive architecture and connected interior experiences, supported by construction supervision in Visakhapatnam.",
   keywords: [
     "architecture",
     "interior design",
@@ -29,9 +27,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "designALine Architects", url: "https://designaline.com" }],
   openGraph: {
-    title: "designALine | Architectural & Interior Design Studio",
+    title: "Design A'Line | Architecture & Interior Design in Visakhapatnam",
     description:
-      "Shaping spaces that inspire. designALine delivers architectural and interior design solutions blending creativity, functionality, and sustainability.",
+      "Site-responsive architecture and connected interior experiences, supported by construction supervision in Visakhapatnam.",
     url: "https://designaline.com",
     siteName: "designALine",
     locale: "en_US",
@@ -83,9 +81,7 @@ export default function RootLayout({
       </head>
 
       <body className="antialiased">
-        <ThemeProvider>
           <div className="min-h-screen pb-20 md:pb-0">
-            <FloatingElements />
             <Header />
 
             <main>{children}</main>
@@ -93,7 +89,6 @@ export default function RootLayout({
             <Footer />
             <MobileActionBar />
           </div>
-        </ThemeProvider>
 
         {/* GA Component (Next.js built-in) */}
         <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />
