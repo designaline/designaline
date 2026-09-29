@@ -13,7 +13,7 @@ const GOOGLE_ADS_ID = "AW-17825264513"; // Your Ads Conversion ID
 export const metadata: Metadata = {
   title: "Design A'Line | Architecture & Interior Design in Visakhapatnam",
   description:
-    "Design A'Line creates site-responsive architecture and connected interior experiences, supported by construction supervision in Visakhapatnam.",
+    "Design A'Line creates site-responsive architecture & connected interior experiences, supported by construction supervision in Visakhapatnam.",
   keywords: [
     "architecture",
     "interior design",
