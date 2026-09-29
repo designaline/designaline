@@ -1,32 +1,19 @@
-import { ThemeProvider } from "../contexts/ThemeContext";
-import { Geist, Geist_Mono } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
-import AnimatedCursor from "../components/AnimatedCursor";
-import FloatingElements from "../components/FloatingElements";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import MobileActionBar from "../components/MobileActionBar";
 
 import type { Metadata } from "next";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 // ---- GOOGLE IDS ----
 const GA_MEASUREMENT_ID = "G-DH64WW77M5"; // Your GA ID
 const GOOGLE_ADS_ID = "AW-17825264513"; // Your Ads Conversion ID
 
 export const metadata: Metadata = {
-  title: "designAline | Architectural & Interior Design Studio",
+  title: "Design A'Line | Architecture & Interior Design in Visakhapatnam",
   description:
-    "designALine is an innovative architectural and interior design firm creating modern, sustainable, and timeless spaces tailored to your vision.",
+    "Design A'Line creates site-responsive architecture and connected interior experiences, supported by construction supervision in Visakhapatnam.",
   keywords: [
     "architecture",
     "interior design",
@@ -40,19 +27,11 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "designALine Architects", url: "https://designaline.com" }],
   openGraph: {
-    title: "designALine | Architectural & Interior Design Studio",
+    title: "Design A'Line | Architecture & Interior Design in Visakhapatnam",
     description:
-      "Shaping spaces that inspire. designALine delivers architectural and interior design solutions blending creativity, functionality, and sustainability.",
+      "Site-responsive architecture and connected interior experiences, supported by construction supervision in Visakhapatnam.",
     url: "https://designaline.com",
     siteName: "designALine",
-    images: [
-      {
-        url: "https://designaline.com/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "designALine Architectural Projects",
-      },
-    ],
     locale: "en_US",
     type: "website",
   },
@@ -61,12 +40,10 @@ export const metadata: Metadata = {
     title: "designALine | Architectural & Interior Design Studio",
     description:
       "Innovative architectural and interior design solutions by designALine. Explore our portfolio of modern and sustainable projects.",
-    images: ["https://designaline.com/og-image.jpg"],
   },
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
   },
   metadataBase: new URL("https://designaline.com"),
 };
@@ -103,20 +80,15 @@ export default function RootLayout({
         />
       </head>
 
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <ThemeProvider>
-          <div className="min-h-screen">
-            <AnimatedCursor />
-            <FloatingElements />
+      <body className="antialiased">
+          <div className="min-h-screen pb-20 md:pb-0">
             <Header />
 
             <main>{children}</main>
 
             <Footer />
+            <MobileActionBar />
           </div>
-        </ThemeProvider>
 
         {/* GA Component (Next.js built-in) */}
         <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />

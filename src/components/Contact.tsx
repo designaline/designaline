@@ -1,334 +1,154 @@
 "use client";
 
-import React from "react";
-import { motion, Variants } from "framer-motion";
-import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
-import Image from "next/image";
-import { useTheme } from "../contexts/ThemeContext";
+import { type FormEvent, type ReactNode, useState } from "react";
+import { Clock, Mail, MapPin, MessageCircle, Phone, Send } from "lucide-react";
+import { motion } from "framer-motion";
+import { contact, createWhatsAppUrl } from "@/config/contact";
 
-// ✅ Strongly typed animation variants
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 },
-  },
+const services = ["Architecture", "Interior Design", "Architecture + Interiors", "Renovation", "Other"] as const;
+
+type FormValues = {
+  name: string;
+  phone: string;
+  email: string;
+  location: string;
+  service: string;
+  timeline: string;
+  details: string;
 };
 
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut", // ✅ Recognized literal string
-    },
-  },
+type FormErrors = Partial<Record<keyof FormValues | "submit", string>>;
+
+const initialValues: FormValues = {
+  name: "",
+  phone: "",
+  email: "",
+  location: "",
+  service: "",
+  timeline: "",
+  details: "",
 };
 
-const Contact: React.FC = () => {
-  const { isDark } = useTheme();
+function validate(values: FormValues): FormErrors {
+  const errors: FormErrors = {};
+  const phoneDigits = values.phone.replace(/\D/g, "");
 
-  const contactInfo: {
-    icon: React.ElementType;
-    label: string;
-    value: string;
-    href?: string | null;
-  }[] = [
-    {
-      icon: Phone,
-      label: "Phone",
-      value: "+91 8333857444",
-      href: "tel:+918333857444",
-    },
-    {
-      icon: Mail,
-      label: "Email",
-      value: "info@designaline.com",
-      href: "mailto:info@designaline.com",
-    },
-    {
-      icon: MapPin,
-      label: "Address",
-      value:
-        "50-24-11, TPT Colony, Balayyasasthri Layout, Seethamma dhara, Vishakapatnam, Andhra Pradesh",
-      href: "https://maps.app.goo.gl/wnzMPmKgdSEvptSQA",
-    },
-    {
-      icon: Clock,
-      label: "Business Hours",
-      value: "Mon-Fri: 9AM-6PM IST",
-      href: null,
-    },
+  if (!values.name.trim()) errors.name = "Please enter your name.";
+  if (phoneDigits.length < 7 || phoneDigits.length > 15) errors.phone = "Enter a valid phone number.";
+  if (values.email && !/^\S+@\S+\.\S+$/.test(values.email)) errors.email = "Enter a valid email address or leave this blank.";
+  if (!values.location.trim()) errors.location = "Please enter the project location.";
+  if (!values.service) errors.service = "Please choose a service.";
+  if (!values.details.trim()) errors.details = "Please share a few details about your project.";
+  return errors;
+}
+
+function buildLeadMessage(values: FormValues) {
+  return [
+    "Hi Design A'Line, I'm planning a project and would like to discuss your services.",
+    "",
+    `Name: ${values.name.trim()}`,
+    `Phone: ${values.phone.trim()}`,
+    values.email ? `Email: ${values.email.trim()}` : null,
+    `Project location: ${values.location.trim()}`,
+    `Service required: ${values.service}`,
+    values.timeline ? `Expected start: ${values.timeline}` : null,
+    `Project details: ${values.details.trim()}`,
+  ].filter(Boolean).join("\n");
+}
+
+export default function Contact() {
+  const [values, setValues] = useState<FormValues>(initialValues);
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const fieldClass = "w-full border-0 border-b border-white/25 bg-transparent px-0 py-3 text-white outline-none placeholder:text-white/35 focus:border-[#b8d1bc] focus:ring-0";
+
+  function updateField(field: keyof FormValues, value: string) {
+    setValues((current) => ({ ...current, [field]: value }));
+    if (errors[field]) setErrors((current) => ({ ...current, [field]: undefined, submit: undefined }));
+  }
+
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (isSubmitting) return;
+
+    const nextErrors = validate(values);
+    if (Object.keys(nextErrors).length) {
+      setErrors(nextErrors);
+      return;
+    }
+
+    const whatsappWindow = window.open("", "_blank");
+    if (!whatsappWindow) {
+      setErrors({ submit: "WhatsApp was blocked by your browser. Use the WhatsApp or Call option below instead." });
+      return;
+    }
+
+    setErrors({});
+    setIsSubmitting(true);
+    whatsappWindow.opener = null;
+    window.setTimeout(() => {
+      whatsappWindow.location.href = createWhatsAppUrl(buildLeadMessage(values));
+      setIsSubmitting(false);
+    }, 350);
+  }
+
+  const contactItems = [
+    { icon: Phone, label: "Phone", value: contact.phoneDisplay, href: contact.phoneHref },
+    { icon: Mail, label: "Email", value: contact.email, href: contact.emailHref },
+    { icon: MapPin, label: "Studio", value: contact.address, href: contact.mapsHref },
+    { icon: Clock, label: "Business Hours", value: "Mon–Fri, 9 AM–6 PM IST", href: undefined },
   ];
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    alert("Thank you for your message! We'll get back to you soon.");
-  };
-
   return (
-    <motion.section
-      id="contact"
-      className={`py-20 ${isDark ? "bg-gray-900" : "bg-white"}`}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-    >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <motion.div
-          className="text-center mb-16"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <motion.div
-            className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-[#1B6B36]/10 border border-[#1B6B36]/20 mb-6"
-            variants={itemVariants}
-            whileHover={{ scale: 1.05 }}
-          >
-            <span
-              className={`text-sm font-medium ${
-                isDark ? "text-gray-300" : "text-gray-700"
-              }`}
-            >
-              Get In Touch
-            </span>
-          </motion.div>
+    <motion.section id="contact" className="bg-[#10291c] py-24 text-white sm:py-32" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.1 }}>
+      <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
+        <div className="mb-16 grid gap-8 lg:grid-cols-2">
+          <div><span className="mb-5 block text-xs font-semibold uppercase tracking-[0.22em] text-[#a9c5ae]">Begin a project</span><h2 className="font-display text-5xl leading-[0.98] tracking-[-0.04em] sm:text-7xl">Every meaningful space begins with a conversation.</h2></div>
+          <p className="max-w-xl self-end text-lg leading-8 text-white/65">Tell us about your site, priorities, and timeline. We&apos;ll prepare a WhatsApp message for you to review and send directly to Design A&apos;Line.</p>
+        </div>
 
-          <motion.h2
-            className={`text-4xl lg:text-5xl font-bold mb-6 ${
-              isDark ? "text-white" : "text-gray-900"
-            }`}
-            variants={itemVariants}
-          >
-            Let&apos;s Create Something{" "}
-            <span className="text-[#1B6B36]">Sustainable</span> Together
-          </motion.h2>
+        <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+          <div>
+            <h3 className="mb-8 font-display text-3xl">Visit or speak with us</h3>
+            <div className="space-y-6">
+              {contactItems.map(({ icon: Icon, label, value, href }) => (
+                <div key={label} className="flex items-start gap-4">
+                  <span className="rounded-full border border-white/20 p-3 text-[#b8d1bc]"><Icon size={20} aria-hidden="true" /></span>
+                  <div>
+                    <h4 className="mb-1 text-sm font-semibold uppercase tracking-[0.12em] text-white/45">{label}</h4>
+                    {href ? <a href={href} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noreferrer" : undefined} className="leading-relaxed text-white/75 hover:text-white">{value}</a> : <p className="text-white/75">{value}</p>}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
 
-          <motion.p
-            className={`text-xl max-w-3xl mx-auto ${
-              isDark ? "text-gray-300" : "text-gray-600"
-            }`}
-            variants={itemVariants}
-          >
-            Ready to start your sustainable design journey? We&apos;d love to
-            hear about your project and explore how we can bring your vision to
-            life.
-          </motion.p>
-        </motion.div>
-
-        <motion.div
-          className="grid lg:grid-cols-2 gap-16"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          {/* Contact Information */}
-          <motion.div className="space-y-8" variants={itemVariants}>
-            <motion.div variants={itemVariants}>
-              <h3
-                className={`text-2xl font-semibold mb-6 ${
-                  isDark ? "text-white" : "text-gray-900"
-                }`}
-              >
-                Contact Information
-              </h3>
-
-              <div className="space-y-6">
-                {contactInfo.map((info, index) => {
-                  const IconComponent = info.icon;
-                  return (
-                    <motion.div
-                      key={index}
-                      className="flex items-start space-x-4"
-                      whileHover={{ x: 10 }}
-                      transition={{ type: "spring", stiffness: 300 }}
-                    >
-                      <div className="flex-shrink-0">
-                        <motion.div
-                          className="p-3 bg-[#1B6B36]/10 rounded-lg"
-                          whileHover={{ scale: 1.1, rotate: 5 }}
-                        >
-                          <IconComponent className="text-[#1B6B36]" size={20} />
-                        </motion.div>
-                      </div>
-
-                      <div>
-                        <h4
-                          className={`font-semibold mb-1 ${
-                            isDark ? "text-white" : "text-gray-900"
-                          }`}
-                        >
-                          {info.label}
-                        </h4>
-
-                        {info.href ? (
-                          <a
-                            href={info.href}
-                            className={`transition-colors duration-200 hover:text-[#1B6B36] ${
-                              isDark ? "text-gray-300" : "text-gray-600"
-                            }`}
-                          >
-                            {info.value}
-                          </a>
-                        ) : (
-                          <span
-                            className={
-                              isDark ? "text-gray-300" : "text-gray-600"
-                            }
-                          >
-                            {info.value}
-                          </span>
-                        )}
-                      </div>
-                    </motion.div>
-                  );
-                })}
+          <div className="rounded-2xl border border-white/15 bg-white/[0.04] p-6 sm:p-8 lg:p-10">
+            <form onSubmit={handleSubmit} noValidate>
+              <div className="grid gap-5 sm:grid-cols-2">
+                <Field id="lead-name" label="Name" required error={errors.name}><input id="lead-name" name="name" autoComplete="name" value={values.name} onChange={(e) => updateField("name", e.target.value)} className={fieldClass} aria-invalid={Boolean(errors.name)} aria-describedby={errors.name ? "lead-name-error" : undefined} /></Field>
+                <Field id="lead-phone" label="Phone Number" required error={errors.phone}><input id="lead-phone" name="phone" type="tel" inputMode="tel" autoComplete="tel" value={values.phone} onChange={(e) => updateField("phone", e.target.value)} className={fieldClass} aria-invalid={Boolean(errors.phone)} aria-describedby={errors.phone ? "lead-phone-error" : undefined} /></Field>
+                <Field id="lead-email" label="Email" hint="Optional" error={errors.email}><input id="lead-email" name="email" type="email" autoComplete="email" value={values.email} onChange={(e) => updateField("email", e.target.value)} className={fieldClass} aria-invalid={Boolean(errors.email)} aria-describedby={errors.email ? "lead-email-error" : undefined} /></Field>
+                <Field id="lead-location" label="Project Location" required error={errors.location}><input id="lead-location" name="location" autoComplete="address-level2" placeholder="City or locality" value={values.location} onChange={(e) => updateField("location", e.target.value)} className={fieldClass} aria-invalid={Boolean(errors.location)} aria-describedby={errors.location ? "lead-location-error" : undefined} /></Field>
+                <Field id="lead-service" label="Service Required" required error={errors.service}><select id="lead-service" name="service" value={values.service} onChange={(e) => updateField("service", e.target.value)} className={fieldClass} aria-invalid={Boolean(errors.service)} aria-describedby={errors.service ? "lead-service-error" : undefined}><option value="">Select a service</option>{services.map((service) => <option key={service}>{service}</option>)}</select></Field>
+                <Field id="lead-timeline" label="Expected Project Start" hint="Optional"><select id="lead-timeline" name="timeline" value={values.timeline} onChange={(e) => updateField("timeline", e.target.value)} className={fieldClass}><option value="">Select a timeline</option><option>Within 3 months</option><option>3–6 months</option><option>6–12 months</option><option>More than 12 months</option><option>Just exploring</option></select></Field>
               </div>
-            </motion.div>
 
-            {/* Office Image */}
-            <motion.div
-              className="aspect-[4/3] rounded-2xl overflow-hidden shadow-xl"
-              variants={itemVariants}
-              whileHover={{ scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <Image
-                src="https://images.pexels.com/photos/3760069/pexels-photo-3760069.jpeg"
-                alt="GreenSpace office"
-                width={600}
-                height={450}
-                className="w-full h-full object-cover"
-              />
-            </motion.div>
-          </motion.div>
+              <div className="mt-5"><Field id="lead-details" label="Project Details" required error={errors.details}><textarea id="lead-details" name="details" rows={5} placeholder="Project type, approximate size, and what you would like help with" value={values.details} onChange={(e) => updateField("details", e.target.value)} className={fieldClass} aria-invalid={Boolean(errors.details)} aria-describedby={errors.details ? "lead-details-error" : undefined} /></Field></div>
 
-          {/* Contact Form */}
-          <motion.div variants={itemVariants}>
-            <motion.div
-              className={`p-8 rounded-2xl ${
-                isDark ? "bg-gray-800 border border-gray-700" : "bg-gray-50"
-              }`}
-              whileHover={{ scale: 1.01 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <h3
-                className={`text-2xl font-semibold mb-6 ${
-                  isDark ? "text-white" : "text-gray-900"
-                }`}
-              >
-                Send us a Message
-              </h3>
+              {errors.submit && <div role="alert" className="mt-5 rounded-lg border border-red-300 bg-red-50 p-4 text-sm text-red-800"><p>{errors.submit}</p><div className="mt-3 flex flex-wrap gap-4 font-semibold"><a href={createWhatsAppUrl()} target="_blank" rel="noreferrer" className="underline">Open WhatsApp</a><a href={contact.phoneHref} className="underline">Call {contact.phoneDisplay}</a></div></div>}
 
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <FormField label="First Name" type="text" isDark={isDark} />
-                  <FormField label="Last Name" type="text" isDark={isDark} />
-                </div>
-
-                <FormField label="Email Address" type="email" isDark={isDark} />
-
-                <div>
-                  <label
-                    className={`block text-sm font-medium mb-2 ${
-                      isDark ? "text-gray-300" : "text-gray-700"
-                    }`}
-                  >
-                    Project Type
-                  </label>
-                  <select
-                    className={`w-full px-4 py-3 rounded-lg border transition-colors duration-200 focus:ring-2 focus:ring-[#1B6B36]/20 focus:border-[#1B6B36] ${
-                      isDark
-                        ? "bg-gray-900 border-gray-600 text-white"
-                        : "bg-white border-gray-300 text-gray-900"
-                    }`}
-                  >
-                    <option>Residential Architecture</option>
-                    <option>Commercial Architecture</option>
-                    <option>Interior Design</option>
-                    <option>Sustainability Consulting</option>
-                    <option>Other</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label
-                    className={`block text-sm font-medium mb-2 ${
-                      isDark ? "text-gray-300" : "text-gray-700"
-                    }`}
-                  >
-                    Project Details
-                  </label>
-                  <textarea
-                    rows={4}
-                    required
-                    className={`w-full px-4 py-3 rounded-lg border transition-colors duration-200 focus:ring-2 focus:ring-[#1B6B36]/20 focus:border-[#1B6B36] ${
-                      isDark
-                        ? "bg-gray-900 border-gray-600 text-white"
-                        : "bg-white border-gray-300 text-gray-900"
-                    }`}
-                    placeholder="Tell us about your project, timeline, and sustainability goals..."
-                  />
-                </div>
-
-                <motion.button
-                  type="submit"
-                  className="w-full inline-flex items-center justify-center px-8 py-4 bg-[#1B6B36] text-white font-semibold rounded-lg hover:bg-[#155a2e] transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
-                  whileHover={{
-                    scale: 1.05,
-                    backgroundColor: "#155a2e",
-                    boxShadow:
-                      "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Send Message
-                  <motion.div
-                    animate={{ x: [0, 5, 0] }}
-                    transition={{ repeat: Infinity, duration: 1.5 }}
-                  >
-                    <Send className="ml-2" size={20} />
-                  </motion.div>
-                </motion.button>
-              </form>
-            </motion.div>
-          </motion.div>
-        </motion.div>
+              <p className="mt-5 text-sm text-white/50">WhatsApp will open with your details. Review the message, then tap Send—nothing is submitted automatically.</p>
+              <button type="submit" disabled={isSubmitting} className="mt-6 inline-flex min-h-13 w-full items-center justify-center rounded-full bg-[#dce8dd] px-8 py-4 font-semibold text-[#173b2a] transition-transform hover:-translate-y-0.5 disabled:cursor-wait disabled:opacity-70">{isSubmitting ? "Preparing WhatsApp…" : "Continue to WhatsApp"}{isSubmitting ? <MessageCircle className="ml-2" size={20} aria-hidden="true" /> : <Send className="ml-2" size={20} aria-hidden="true" />}</button>
+            </form>
+          </div>
+        </div>
       </div>
     </motion.section>
   );
-};
-
-// ✅ Extracted reusable input field to avoid repetition
-interface FormFieldProps {
-  label: string;
-  type: string;
-  isDark: boolean;
 }
 
-const FormField: React.FC<FormFieldProps> = ({ label, type, isDark }) => (
-  <div>
-    <label
-      className={`block text-sm font-medium mb-2 ${
-        isDark ? "text-gray-300" : "text-gray-700"
-      }`}
-    >
-      {label}
-    </label>
-    <input
-      type={type}
-      required
-      className={`w-full px-4 py-3 rounded-lg border transition-colors duration-200 focus:ring-2 focus:ring-[#1B6B36]/20 focus:border-[#1B6B36] ${
-        isDark
-          ? "bg-gray-900 border-gray-600 text-white"
-          : "bg-white border-gray-300 text-gray-900"
-      }`}
-    />
-  </div>
-);
-
-export default Contact;
+function Field({ id, label, required, hint, error, children }: { id: string; label: string; required?: boolean; hint?: string; error?: string; children: ReactNode }) {
+  return <div><label htmlFor={id} className="mb-2 block text-sm font-medium">{label} {required && <span aria-hidden="true">*</span>}{hint && <span className="ml-1 font-normal text-gray-500">({hint})</span>}</label>{children}{error && <p id={`${id}-error`} className="mt-1.5 text-sm text-red-600">{error}</p>}</div>;
+}

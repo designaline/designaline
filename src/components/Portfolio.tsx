@@ -1,152 +1,31 @@
-"use client";
-
-import { motion, Variants } from "framer-motion";
-import { MapPin } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
-import { useTheme } from "../contexts/ThemeContext";
-import { projects } from "../data/projects"; // ✅ import data
+import { ArrowUpRight } from "lucide-react";
+import { projects } from "@/data/projects";
 
-const Portfolio: React.FC = () => {
-  const { isDark } = useTheme();
-
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1 },
-    },
-  };
-
-  const cardVariants: Variants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
-    },
-  };
-
+export default function Portfolio() {
   return (
-    <motion.section
-      id="portfolio"
-      className={`py-20 ${isDark ? "bg-gray-900" : "bg-white"}`}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-    >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <motion.div className="text-center mb-16" variants={containerVariants}>
-          <motion.div
-            className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-[#1B6B36]/10 border border-[#1B6B36]/20 mb-6"
-            variants={cardVariants}
-          >
-            <span
-              className={`text-sm font-medium ${
-                isDark ? "text-gray-300" : "text-gray-700"
-              }`}
-            >
-              Our Portfolio
-            </span>
-          </motion.div>
+    <section id="portfolio" className="bg-[#fcfaf5] py-24 text-[#17271e] sm:py-32">
+      <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
+        <div className="mb-16 flex flex-col justify-between gap-8 sm:flex-row sm:items-end">
+          <div><p className="mb-5 text-xs font-semibold uppercase tracking-[0.22em] text-[#53705d]">Selected work</p><h2 className="font-display text-5xl leading-none tracking-[-0.04em] sm:text-7xl">Built stories.</h2></div>
+          <p className="max-w-md leading-7 text-[#5b685f]">Homes, shared spaces, and interiors shaped by their context and the lives unfolding within them.</p>
+        </div>
 
-          <motion.h2
-            className={`text-4xl lg:text-5xl font-bold mb-6 ${
-              isDark ? "text-white" : "text-gray-900"
-            }`}
-            variants={cardVariants}
-          >
-            <span className="text-[#1B6B36]">Sustainable</span> & Contemporary
-            Projects
-          </motion.h2>
-
-          <motion.p
-            className={`text-xl max-w-3xl mx-auto ${
-              isDark ? "text-gray-300" : "text-gray-600"
-            }`}
-            variants={cardVariants}
-          >
-            Explore our portfolio of residential, commercial, and villa projects
-            designed with a strong focus on sustainability and lifestyle
-            enhancement.
-          </motion.p>
-        </motion.div>
-
-        {/* Projects Grid */}
-        <motion.div
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-          variants={containerVariants}
-        >
+        <div className="grid gap-x-7 gap-y-14 md:grid-cols-2">
           {projects.map((project, index) => (
-            <Link href={`/projects/${project.slug}`} key={project.slug}>
-              <motion.div
-                className={`group rounded-2xl overflow-hidden transition-all duration-300 ${
-                  isDark
-                    ? "bg-gray-800 border border-gray-700"
-                    : "bg-white border border-gray-200"
-                } shadow-lg cursor-pointer`}
-                variants={cardVariants}
-                whileHover={{
-                  scale: 1.05,
-                  borderColor: isDark
-                    ? "rgba(27, 107, 54, 0.5)"
-                    : "rgba(27, 107, 54, 0.3)",
-                  boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-                }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                {/* Image */}
-                <div className="relative h-48 overflow-hidden">
-                  <motion.div
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.5 }}
-                    className="w-full h-full"
-                  >
-                    <Image
-                      src={project.images[0]}
-                      alt={project.title}
-                      fill
-                      className="object-cover object-center"
-                    />
-                  </motion.div>
-                </div>
-
-                {/* Content */}
-                <div className="p-6">
-                  <div className="flex items-center space-x-2 mb-3">
-                    <MapPin className="text-[#1B6B36]" size={16} />
-                    <span
-                      className={`text-sm ${
-                        isDark ? "text-gray-400" : "text-gray-600"
-                      }`}
-                    >
-                      {project.location}
-                    </span>
-                  </div>
-                  <h3
-                    className={`text-xl font-semibold mb-3 ${
-                      isDark ? "text-white" : "text-gray-900"
-                    }`}
-                  >
-                    {project.title}
-                  </h3>
-                  <p
-                    className={`mb-4 text-sm leading-relaxed ${
-                      isDark ? "text-gray-300" : "text-gray-600"
-                    }`}
-                  >
-                    {project.description}
-                  </p>
-                </div>
-              </motion.div>
+            <Link href={`/projects/${project.slug}`} key={project.slug} className={`group block ${index % 3 === 1 ? "md:pt-20" : ""} ${index === 2 ? "md:col-span-2 md:grid md:grid-cols-[1.45fr_0.55fr] md:items-end md:gap-8" : ""}`}>
+              <div className={`relative overflow-hidden rounded-xl bg-[#d9d8ce] ${index === 2 ? "aspect-[16/9]" : "aspect-[4/3]"}`}>
+                <Image src={project.images[0]} alt={`${project.title}, ${project.location}`} fill sizes={index === 2 ? "100vw" : "(max-width: 768px) 100vw, 50vw"} className="object-cover transition-transform duration-700 group-hover:scale-[1.025]" />
+              </div>
+              <div className="mt-5 flex items-start justify-between gap-5 border-t border-[#173b2a]/15 pt-4">
+                <div><p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#718077]">{project.category} · {project.location}</p><h3 className="mt-2 font-display text-3xl">{project.title}</h3></div>
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-[#173b2a]/20 transition-colors group-hover:bg-[#173b2a] group-hover:text-white"><ArrowUpRight size={18} /></span>
+              </div>
             </Link>
           ))}
-        </motion.div>
+        </div>
       </div>
-    </motion.section>
+    </section>
   );
-};
-
-export default Portfolio;
+}

@@ -1,198 +1,27 @@
-"use client";
-
-import { Instagram, Linkedin } from "lucide-react";
 import Image from "next/image";
-import React from "react";
-import { useTheme } from "../contexts/ThemeContext";
-// import { useTheme } from '@/contexts/ThemeContext'
+import { Instagram, Linkedin, ArrowUpRight } from "lucide-react";
 
-const Footer: React.FC = () => {
-  const { isDark } = useTheme();
+const links = [
+  { label: "Approach", href: "/#approach" },
+  { label: "Process", href: "/#process" },
+  { label: "Projects", href: "/#portfolio" },
+  { label: "Studio", href: "/#about" },
+  { label: "Contact", href: "/#contact" },
+];
 
-  const socialLinks = [
-    {
-      icon: Instagram,
-      href: "https://www.instagram.com/designaline.in?igsh=MXRhMmhzOHp6YXg3ag%3D%3D&utm_source=qr",
-      label: "Instagram",
-    },
-    // { icon: Twitter, href: "#", label: "Twitter" },
-    {
-      icon: Linkedin,
-      href: "https://www.linkedin.com/company/designa-line",
-      label: "LinkedIn",
-    },
-    // { icon: Youtube, href: "#", label: "YouTube" },
-  ];
-
-  const footerSections = [
-    {
-      title: "Services",
-      links: [
-        { label: "Sustainable Architecture", href: "#" },
-        { label: "Interior Design", href: "#" },
-        { label: "Landscape design", href: "#" },
-        // { label: "LEED Certification", href: "#" },
-      ],
-    },
-    {
-      title: "Company",
-      links: [
-        { label: "About Us", href: "#about" },
-        { label: "Our Team", href: "#about" },
-        { label: "Careers", href: "#" },
-        { label: "Press", href: "#" },
-      ],
-    },
-    {
-      title: "Resources",
-      links: [
-        { label: "Portfolio", href: "#portfolio" },
-        { label: "Case Studies", href: "#" },
-        { label: "Blog", href: "#" },
-        { label: "Sustainability Guide", href: "#" },
-      ],
-    },
-  ];
-
+export default function Footer() {
   return (
-    <footer
-      className={`py-16 ${
-        isDark
-          ? "bg-gray-900 border-t border-gray-800"
-          : "bg-gray-50 border-t border-gray-200"
-      }`}
-    >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-4 gap-12 mb-12">
-          {/* Brand Section */}
-          <div className="lg:col-span-1">
-            <div className="flex items-center space-x-3 mb-6">
-              {/* <div className="p-2 bg-[#1B6B36] rounded-lg">
-                <Leaf className="text-white" size={24} />
-              </div> */}
-              <Image
-                src="/logo.png"
-                alt="GreenSpace Logo"
-                width={40}
-                height={40}
-                priority
-              />
-              <div>
-                <h1 className="text-xl font-bold text-[#1B6B36]">
-                  DesignAline
-                </h1>
-                <p
-                  className={`text-sm ${
-                    isDark ? "text-gray-400" : "text-gray-600"
-                  }`}
-                >
-                  Architecture & Interiors
-                </p>
-              </div>
-            </div>
-
-            <p
-              className={`mb-6 leading-relaxed ${
-                isDark ? "text-gray-300" : "text-gray-600"
-              }`}
-            >
-              Creating beautiful, sustainable spaces that harmonize with nature
-              while exceeding client expectations.
-            </p>
-
-            {/* Social Links */}
-            <div className="flex space-x-4">
-              {socialLinks.map((social, index) => {
-                const IconComponent = social.icon;
-                return (
-                  <a
-                    key={index}
-                    href={social.href}
-                    aria-label={social.label}
-                    className={`p-2 rounded-lg transition-colors duration-200 ${
-                      isDark
-                        ? "bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white"
-                        : "bg-gray-200 text-gray-600 hover:bg-gray-300 hover:text-gray-900"
-                    }`}
-                  >
-                    <IconComponent size={18} />
-                  </a>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Footer Links */}
-          {footerSections.map((section, index) => (
-            <div key={index}>
-              <h3
-                className={`font-semibold mb-6 ${
-                  isDark ? "text-white" : "text-gray-900"
-                }`}
-              >
-                {section.title}
-              </h3>
-
-              <ul className="space-y-4">
-                {section.links.map((link, linkIndex) => (
-                  <li key={linkIndex}>
-                    <a
-                      href={link.href}
-                      className={`transition-colors duration-200 hover:text-[#1B6B36] ${
-                        isDark ? "text-gray-300" : "text-gray-600"
-                      }`}
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-
-        {/* Bottom Bar */}
-        <div
-          className={`pt-8 border-t flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 ${
-            isDark ? "border-gray-800" : "border-gray-200"
-          }`}
-        >
-          <p
-            className={`text-sm ${isDark ? "text-gray-400" : "text-gray-600"}`}
-          >
-            © 2024 DesignAline. All rights reserved.
-          </p>
-
-          <div className="flex space-x-6 text-sm">
-            <a
-              href="/privacy-policy"
-              className={`transition-colors duration-200 hover:text-[#1B6B36] ${
-                isDark ? "text-gray-400" : "text-gray-600"
-              }`}
-            >
-              Privacy Policy
-            </a>
-            <a
-              href="/terms-of-service"
-              className={`transition-colors duration-200 hover:text-[#1B6B36] ${
-                isDark ? "text-gray-400" : "text-gray-600"
-              }`}
-            >
-              Terms of Service
-            </a>
-            <a
-              href="/cookie-policy"
-              className={`transition-colors duration-200 hover:text-[#1B6B36] ${
-                isDark ? "text-gray-400" : "text-gray-600"
-              }`}
-            >
-              Cookie Policy
-            </a>
+    <footer className="bg-[#0b1e14] pb-10 pt-16 text-white">
+      <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
+        <div className="grid gap-12 border-b border-white/15 pb-14 lg:grid-cols-[1.2fr_0.8fr]">
+          <div><div className="flex items-center gap-3"><Image src="/logo.png" alt="Design A'Line logo" width={48} height={48} className="brightness-0 invert" /><div><p className="text-xl font-semibold">Design A&apos;Line</p><p className="text-xs uppercase tracking-[0.16em] text-white/45">Architecture · Interiors</p></div></div><p className="font-display mt-8 max-w-xl text-3xl leading-tight text-white/90 sm:text-4xl">Architecture rooted in place.<br /><em className="font-normal text-[#a9c5ae]">Interiors shaped around life.</em></p></div>
+          <div className="grid grid-cols-2 gap-8">
+            <div><p className="mb-5 text-xs uppercase tracking-[0.18em] text-white/40">Navigate</p><nav className="space-y-3">{links.map((link) => <a key={link.label} href={link.href} className="block text-white/70 hover:text-white">{link.label}</a>)}</nav></div>
+            <div><p className="mb-5 text-xs uppercase tracking-[0.18em] text-white/40">Follow</p><div className="space-y-3"><a href="https://www.instagram.com/designaline.in?igsh=MXRhMmhzOHp6YXg3ag%3D%3D&utm_source=qr" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-white/70 hover:text-white"><Instagram size={17} />Instagram <ArrowUpRight size={14} /></a><a href="https://www.linkedin.com/company/designa-line" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-white/70 hover:text-white"><Linkedin size={17} />LinkedIn <ArrowUpRight size={14} /></a></div></div>
           </div>
         </div>
+        <div className="flex flex-col gap-5 pt-7 text-xs text-white/40 sm:flex-row sm:items-center sm:justify-between"><p>© {new Date().getFullYear()} Design A&apos;Line. All rights reserved.</p><div className="flex flex-wrap gap-5"><a href="/privacy-policy" className="hover:text-white">Privacy</a><a href="/terms-of-service" className="hover:text-white">Terms</a><a href="/cookie-policy" className="hover:text-white">Cookies</a></div></div>
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}
