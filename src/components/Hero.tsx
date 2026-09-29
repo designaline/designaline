@@ -12,11 +12,6 @@ export default function Hero() {
   return (
     <section id="home" className="relative overflow-hidden bg-[#f5f1e8] pb-16 pt-28 text-[#17271e] lg:min-h-screen lg:pb-10 lg:pt-28">
       <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
-        <div className="mb-10 flex items-center justify-between border-b border-[#173b2a]/15 pb-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#657268]">
-          <span>Architecture · Interior Design</span>
-          <span className="hidden sm:block">Visakhapatnam, India</span>
-        </div>
-
         <div className="grid items-end gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
           <motion.div {...entrance} transition={{ duration: 0.8, ease: "easeOut" }} className="relative z-10 lg:pb-10">
             <p className="mb-7 max-w-md text-sm font-semibold uppercase tracking-[0.18em] text-[#477058]">Building a sustainable future</p>
