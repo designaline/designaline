@@ -8,6 +8,7 @@ export const contact = {
     "50-24-11, TPT Colony, Balayyasasthri Layout, Seethammadhara, Visakhapatnam, Andhra Pradesh",
   mapsHref: "https://maps.app.goo.gl/wnzMPmKgdSEvptSQA",
   whatsappNumber: "918333857444",
+  instagramHref: "https://www.instagram.com/designaline.in/",
 } as const;
 
 export const defaultWhatsAppMessage =

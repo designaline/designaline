@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import MobileActionBar from "../components/MobileActionBar";
+import FloatingSocialActions from "../components/FloatingSocialActions";
 
 import type { Metadata } from "next";
 
@@ -87,6 +88,7 @@ export default function RootLayout({
             <main>{children}</main>
 
             <Footer />
+            <FloatingSocialActions />
             <MobileActionBar />
           </div>
 
