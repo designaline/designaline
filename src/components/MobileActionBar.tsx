@@ -1,7 +1,8 @@
 "use client";
 
-import { CalendarDays, Instagram, MessageCircle, Phone } from "lucide-react";
+import { CalendarDays, MessageCircle, Phone } from "lucide-react";
 import { contact, createWhatsAppUrl } from "@/config/contact";
+import InstagramBrandIcon from "@/components/InstagramBrandIcon";
 
 const actions = [
   { label: "Call", href: contact.phoneHref, icon: Phone },
@@ -14,7 +15,7 @@ const actions = [
   {
     label: "Instagram",
     href: contact.instagramHref,
-    icon: Instagram,
+    icon: InstagramBrandIcon,
     external: true,
   },
   { label: "Consult", href: "/#contact", icon: CalendarDays },

@@ -1,5 +1,6 @@
-import { Instagram, MessageCircle } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 import { contact, createWhatsAppUrl } from "@/config/contact";
+import InstagramBrandIcon from "@/components/InstagramBrandIcon";
 
 const actions = [
   {
@@ -12,7 +13,7 @@ const actions = [
   {
     label: "Follow on Instagram",
     href: contact.instagramHref,
-    icon: Instagram,
+    icon: InstagramBrandIcon,
     className:
       "border border-[#173b2a]/15 bg-[#f5f1e8] text-[#173b2a] hover:bg-white",
     trackingName: "instagram-float",
