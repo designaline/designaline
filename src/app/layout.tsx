@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import MobileActionBar from "../components/MobileActionBar";
+import FloatingSocialActions from "../components/FloatingSocialActions";
 
 import type { Metadata } from "next";
 
@@ -13,7 +14,7 @@ const GOOGLE_ADS_ID = "AW-17825264513"; // Your Ads Conversion ID
 export const metadata: Metadata = {
   title: "Design A'Line | Architecture & Interior Design in Visakhapatnam",
   description:
-    "Design A'Line creates site-responsive architecture and connected interior experiences, supported by construction supervision in Visakhapatnam.",
+    "Design A'Line creates site-responsive architecture & connected interior experiences, supported by construction supervision in Visakhapatnam.",
   keywords: [
     "architecture",
     "interior design",
@@ -87,6 +88,7 @@ export default function RootLayout({
             <main>{children}</main>
 
             <Footer />
+            <FloatingSocialActions />
             <MobileActionBar />
           </div>
 

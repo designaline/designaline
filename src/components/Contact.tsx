@@ -105,7 +105,7 @@ export default function Contact() {
       <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
         <div className="mb-16 grid gap-8 lg:grid-cols-2">
           <div><span className="mb-5 block text-xs font-semibold uppercase tracking-[0.22em] text-[#a9c5ae]">Begin a project</span><h2 className="font-display text-5xl leading-[0.98] tracking-[-0.04em] sm:text-7xl">Every meaningful space begins with a conversation.</h2></div>
-          <p className="max-w-xl self-end text-lg leading-8 text-white/65">Tell us about your site, priorities, and timeline. We&apos;ll prepare a WhatsApp message for you to review and send directly to Design A&apos;Line.</p>
+          <p className="max-w-xl self-end text-lg leading-8 text-white/65">Tell us about your site, priorities & timeline. We&apos;ll prepare a WhatsApp message for you to review and send directly to Design A&apos;Line.</p>
         </div>
 
         <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
