@@ -4,6 +4,7 @@ import { type FormEvent, type ReactNode, useState } from "react";
 import { Clock, Mail, MapPin, MessageCircle, Phone, Send } from "lucide-react";
 import { motion } from "framer-motion";
 import { contact, createWhatsAppUrl } from "@/config/contact";
+import { trackWhatsAppEnquiryHandoff } from "@/config/analytics";
 
 const services = ["Architecture", "Interior Design", "Architecture + Interiors", "Renovation", "Other"] as const;
 
@@ -88,8 +89,15 @@ export default function Contact() {
     setIsSubmitting(true);
     whatsappWindow.opener = null;
     window.setTimeout(() => {
-      whatsappWindow.location.href = createWhatsAppUrl(buildLeadMessage(values));
-      setIsSubmitting(false);
+      try {
+        if (whatsappWindow.closed) throw new Error("WhatsApp window closed");
+        whatsappWindow.location.href = createWhatsAppUrl(buildLeadMessage(values));
+        trackWhatsAppEnquiryHandoff();
+      } catch {
+        setErrors({ submit: "WhatsApp could not be opened. Use the WhatsApp or Call option below instead." });
+      } finally {
+        setIsSubmitting(false);
+      }
     }, 350);
   }
 
