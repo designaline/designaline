@@ -4,12 +4,12 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import MobileActionBar from "../components/MobileActionBar";
 import FloatingSocialActions from "../components/FloatingSocialActions";
+import { GOOGLE_ADS_ID } from "@/config/analytics";
 
 import type { Metadata } from "next";
 
 // ---- GOOGLE IDS ----
 const GA_MEASUREMENT_ID = "G-DH64WW77M5"; // Your GA ID
-const GOOGLE_ADS_ID = "AW-17825264513"; // Your Ads Conversion ID
 
 export const metadata: Metadata = {
   title: "Design A'Line | Architecture & Interior Design in Visakhapatnam",
