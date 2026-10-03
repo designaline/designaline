@@ -7,7 +7,9 @@ export const contact = {
   address:
     "50-104-3/4, Balayya Sastri Layout, Seethammadara, Visakhapatnam, Andhra Pradesh",
   mapsHref:
-    "https://www.google.com/maps/search/?api=1&query=Design%20A%27Line%2C%2050-104-3%2F4%2C%20Balayya%20Sastri%20Layout%2C%20Seethammadara%2C%20Visakhapatnam%2C%20Andhra%20Pradesh",
+    "https://www.google.com/maps/search/?api=1&query=Studio%20Design%20A%27Line&query_place_id=ChIJochIlDZDOToREiNZERZ7F38",
+  mapsEmbedHref:
+    "https://www.google.com/maps?cid=9157923701991744274&output=embed",
   whatsappNumber: "918333857444",
   instagramHref: "https://www.instagram.com/designaline.in/",
 } as const;
