@@ -130,6 +130,28 @@ export default function Contact() {
                 </div>
               ))}
             </div>
+            <div className="mt-8 overflow-hidden rounded-2xl border border-white/20">
+              <iframe
+                title="Studio Design A'Line location on Google Maps"
+                src={contact.mapsEmbedHref}
+                width="100%"
+                height="300"
+                className="block w-full border-0"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
+              <a
+                href={contact.mapsHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex min-h-12 items-center justify-center gap-2 bg-white/5 px-5 py-3 text-sm font-semibold text-[#dce8dd] hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-white"
+              >
+                <MapPin size={18} aria-hidden="true" />
+                Open studio in Google Maps
+                <span className="sr-only"> (opens in a new tab)</span>
+              </a>
+            </div>
           </div>
 
           <div className="rounded-2xl border border-white/15 bg-white/[0.04] p-6 sm:p-8 lg:p-10">
